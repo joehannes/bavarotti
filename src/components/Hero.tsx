@@ -20,7 +20,7 @@ const Hero = ({ translations, onOrderClick }: HeroProps) => (
     </div>
     <div className="hero__image" aria-hidden="true">
       <img
-        src="https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_840,h_640,q_auto,f_auto/coastal-hero.jpg"
+        src="https://res.cloudinary.com/demo/image/upload/c_fill,w_840,h_640,q_auto,f_auto/sea-turtle.jpg"
         alt=""
         loading="lazy"
       />

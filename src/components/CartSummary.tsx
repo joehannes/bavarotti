@@ -65,21 +65,14 @@ const CartSummary = ({
   );
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
 
-  const itemsLabel = translations['cart.items'] ?? '{count} items';
-  const cartTitle = translations['cart.title'] ?? 'Your order';
-  const cartEmpty = translations['cart.empty'] ?? 'Add items to your order.';
-  const cartNote = translations['cart.note'] ?? '';
-  const taxNote = translations['cart.taxNote'] ?? '';
-  const orderLabel = translations['cta.order'] ?? 'Order via WhatsApp';
-
   return (
     <aside className="cart">
       <div className="cart__header">
-        <h3>{cartTitle}</h3>
-        <span>{itemsLabel.replace('{count}', String(totalItems))}</span>
+        <h3>{translations['cart.title']}</h3>
+        <span>{translations['cart.items'].replace('{count}', String(totalItems))}</span>
       </div>
       {orderItems.length === 0 ? (
-        <p className="cart__empty">{cartEmpty}</p>
+        <p className="cart__empty">{translations['cart.empty']}</p>
       ) : (
         <ul className="cart__list">
           {orderItems.map((order) => (
@@ -95,10 +88,9 @@ const CartSummary = ({
         href={orderItems.length === 0 ? '#' : whatsappUrl}
         aria-disabled={orderItems.length === 0}
       >
-        {orderLabel}
+        {translations['cta.order']}
       </a>
-      {cartNote ? <p className="cart__note">{cartNote}</p> : null}
-      {taxNote ? <p className="cart__note">{taxNote}</p> : null}
+      <p className="cart__note">{translations['cart.note']}</p>
     </aside>
   );
 };
