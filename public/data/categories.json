@@ -1,0 +1,32 @@
+[
+  {
+    "id": "antipasti",
+    "labelKey": "category.antipasti",
+    "descriptionKey": "category.antipasti.desc"
+  },
+  {
+    "id": "pasta",
+    "labelKey": "category.pasta",
+    "descriptionKey": "category.pasta.desc"
+  },
+  {
+    "id": "pizza",
+    "labelKey": "category.pizza",
+    "descriptionKey": "category.pizza.desc"
+  },
+  {
+    "id": "seafood",
+    "labelKey": "category.seafood",
+    "descriptionKey": "category.seafood.desc"
+  },
+  {
+    "id": "mexican",
+    "labelKey": "category.mexican",
+    "descriptionKey": "category.mexican.desc"
+  },
+  {
+    "id": "drinks",
+    "labelKey": "category.drinks",
+    "descriptionKey": "category.drinks.desc"
+  }
+]

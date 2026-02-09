@@ -1,0 +1,22 @@
+[
+  {
+    "id": "chef-catch",
+    "nameKey": "specials.chefCatch.name",
+    "descriptionKey": "specials.chefCatch.desc",
+    "image": {
+      "url": "https://res.cloudinary.com/demo/image/upload/c_fill,w_680,h_460,q_auto,f_auto/fish.jpg",
+      "altKey": "specials.chefCatch.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "summer-mariscos",
+    "nameKey": "specials.summerMariscos.name",
+    "descriptionKey": "specials.summerMariscos.desc",
+    "image": {
+      "url": "https://res.cloudinary.com/demo/image/upload/c_fill,w_680,h_460,q_auto,f_auto/shrimp.jpg",
+      "altKey": "specials.summerMariscos.alt"
+    },
+    "available": false
+  }
+]

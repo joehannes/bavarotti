@@ -1,0 +1,55 @@
+[
+  {
+    "id": "seafood-pasta",
+    "categoryId": "pasta",
+    "nameKey": "menu.seafoodPasta.name",
+    "descriptionKey": "menu.seafoodPasta.desc",
+    "price": 18.5,
+    "currency": "USD",
+    "image": {
+      "url": "https://res.cloudinary.com/demo/image/upload/c_fill,w_600,h_400,q_auto,f_auto/sea-turtle.jpg",
+      "altKey": "menu.seafoodPasta.alt"
+    },
+    "available": true,
+    "tags": ["signature", "seafood"]
+  },
+  {
+    "id": "lobster-grill",
+    "categoryId": "seafood",
+    "nameKey": "menu.lobster.name",
+    "descriptionKey": "menu.lobster.desc",
+    "price": 32,
+    "currency": "USD",
+    "image": {
+      "url": "https://res.cloudinary.com/demo/image/upload/c_fill,w_600,h_400,q_auto,f_auto/lobster.jpg",
+      "altKey": "menu.lobster.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "taco-marino",
+    "categoryId": "mexican",
+    "nameKey": "menu.tacoMarino.name",
+    "descriptionKey": "menu.tacoMarino.desc",
+    "price": 12,
+    "currency": "USD",
+    "image": {
+      "url": "https://res.cloudinary.com/demo/image/upload/c_fill,w_600,h_400,q_auto,f_auto/taco.jpg",
+      "altKey": "menu.tacoMarino.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "isla-spritz",
+    "categoryId": "drinks",
+    "nameKey": "menu.islaSpritz.name",
+    "descriptionKey": "menu.islaSpritz.desc",
+    "price": 8,
+    "currency": "USD",
+    "image": {
+      "url": "https://res.cloudinary.com/demo/image/upload/c_fill,w_600,h_400,q_auto,f_auto/cocktail.jpg",
+      "altKey": "menu.islaSpritz.alt"
+    },
+    "available": true
+  }
+]
