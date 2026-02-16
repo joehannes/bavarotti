@@ -63,12 +63,6 @@ Optional local demo data is mirrored in `public/data` for quick previews without
 
 Menu, specials, and hero images use public Cloudinary URLs. To add more images, upload to Cloudinary and paste the public URL into your JSON data.
 
-## Asset Bundle (Placeholder Images + Upload Script)
-
-Run `scripts/upload_jsonbin_cloudinary.sh` to upload JSON and placeholder menu images. It expects JSONBin and Cloudinary credentials (see `assets/README.md`).
-
-Build it locally with `bash scripts/package_assets.sh` (kept out of git to avoid binary-file PR issues).
-
 ## Deploy to Cloudflare Pages
 
 1. Push the repo to GitHub.

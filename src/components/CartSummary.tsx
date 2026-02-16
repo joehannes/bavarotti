@@ -1,11 +1,5 @@
 import type { OrderItem, Translations } from '../services/types';
 
-const safeText = (value: unknown, fallback: string): string =>
-  typeof value === 'string' ? value : fallback;
-
-const fillTemplate = (template: unknown, value: string, fallback: string): string =>
-  safeText(template, fallback).replace('{value}', value);
-
 const buildWhatsAppMessage = (
   restaurantName: string,
   orderItems: OrderItem[],
@@ -13,33 +7,39 @@ const buildWhatsAppMessage = (
   languageLabel: string,
   note?: string,
 ) => {
+  const replacePlaceholder = (template: string, value: string) =>
+    template.replace('{value}', value);
   const lines = orderItems.map((order) => {
-    const translatedName = safeText(translations[order.item.nameKey], order.item.nameKey);
+    const translatedName = translations[order.item.nameKey] ?? order.item.nameKey;
     return `- ${order.quantity}x ${translatedName}`;
   });
-
   const message = [
-    safeText(translations['whatsapp.greeting'], 'Hello 👋'),
-    fillTemplate(
-      translations['whatsapp.intro'],
+    translations['whatsapp.greeting'] ?? 'Hello 👋',
+    replacePlaceholder(
+      translations['whatsapp.intro'] ?? 'I would like to order from {value}:',
       restaurantName,
-      'I would like to order from {value}:',
     ),
     '',
     ...lines,
     '',
-    fillTemplate(translations['whatsapp.language'], languageLabel, 'Language: {value}'),
+    replacePlaceholder(
+      translations['whatsapp.language'] ?? 'Language: {value}',
+      languageLabel,
+    ),
   ];
 
   if (note) {
-    message.push('', fillTemplate(translations['whatsapp.note'], note, 'Note: {value}'));
+    message.push(
+      '',
+      replacePlaceholder(translations['whatsapp.note'] ?? 'Note: {value}', note),
+    );
   }
 
   return message.join('\n');
 };
 
 type CartSummaryProps = {
-  translations?: Translations;
+  translations: Translations;
   orderItems: OrderItem[];
   restaurantName: string;
   whatsappNumber: string;
@@ -47,7 +47,7 @@ type CartSummaryProps = {
 };
 
 const CartSummary = ({
-  translations = {},
+  translations,
   orderItems,
   restaurantName,
   whatsappNumber,
@@ -60,30 +60,24 @@ const CartSummary = ({
     translations,
     languageLabel,
   );
-  const encodedMessage = encodeURIComponent(message);
+  const encodedMessage = encodeURIComponent(
+    message.replace(/\n\n/g, '\n\n'),
+  );
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-
-  const itemsTemplate = safeText(translations['cart.items'], '{count} items');
-  const itemsLabel = itemsTemplate.replace('{count}', String(totalItems));
-  const cartTitle = safeText(translations['cart.title'], 'Your order');
-  const cartEmpty = safeText(translations['cart.empty'], 'Add items to your order.');
-  const cartNote = safeText(translations['cart.note'], '');
-  const taxNote = safeText(translations['cart.taxNote'], '');
-  const orderLabel = safeText(translations['cta.order'], 'Order via WhatsApp');
 
   return (
     <aside className="cart">
       <div className="cart__header">
-        <h3>{cartTitle}</h3>
-        <span>{itemsLabel}</span>
+        <h3>{translations['cart.title']}</h3>
+        <span>{translations['cart.items'].replace('{count}', String(totalItems))}</span>
       </div>
       {orderItems.length === 0 ? (
-        <p className="cart__empty">{cartEmpty}</p>
+        <p className="cart__empty">{translations['cart.empty']}</p>
       ) : (
         <ul className="cart__list">
           {orderItems.map((order) => (
             <li key={order.item.id}>
-              <span>{safeText(translations[order.item.nameKey], order.item.nameKey)}</span>
+              <span>{translations[order.item.nameKey] ?? order.item.nameKey}</span>
               <span>{order.quantity}x</span>
             </li>
           ))}
@@ -94,10 +88,9 @@ const CartSummary = ({
         href={orderItems.length === 0 ? '#' : whatsappUrl}
         aria-disabled={orderItems.length === 0}
       >
-        {orderLabel}
+        {translations['cta.order']}
       </a>
-      {cartNote ? <p className="cart__note">{cartNote}</p> : null}
-      {taxNote ? <p className="cart__note">{taxNote}</p> : null}
+      <p className="cart__note">{translations['cart.note']}</p>
     </aside>
   );
 };
