@@ -1,0 +1,15 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'>
+  <defs>
+    <linearGradient id='bg' x1='0' y1='0' x2='1' y2='1'>
+      <stop offset='0%' stop-color='#1c6d6f'/>
+      <stop offset='100%' stop-color='#f6c7a1'/>
+    </linearGradient>
+  </defs>
+  <rect width='1200' height='800' fill='url(#bg)'/>
+  <rect x='80' y='80' width='1040' height='640' rx='48' fill='rgba(255,255,255,0.85)'/>
+  <text x='140' y='220' font-size='54' font-family='Arial, sans-serif' fill='#0f2c2f'>Bavarotti</text>
+  <text x='140' y='300' font-size='36' font-family='Arial, sans-serif' fill='#2f4f53'>Menu preview</text>
+  <text x='140' y='420' font-size='44' font-family='Arial, sans-serif' fill='#1b1b1b'>menu.extraSauces.name</text>
+  <text x='140' y='500' font-size='28' font-family='Arial, sans-serif' fill='#4a5a5d'>Italian coastal • Dominican sea • Mexican spark</text>
+  <text x='140' y='580' font-size='24' font-family='Arial, sans-serif' fill='#4a5a5d'>Replace with real dish photography when available</text>
+</svg>
