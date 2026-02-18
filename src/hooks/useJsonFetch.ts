@@ -6,23 +6,6 @@ export type FetchState<T> = {
   error: string | null;
 };
 
-type JsonBinEnvelope<T> = {
-  record?: T;
-};
-
-const unwrapJsonBinRecord = <T,>(payload: unknown): T => {
-  if (
-    payload !== null &&
-    typeof payload === 'object' &&
-    'record' in payload &&
-    (payload as JsonBinEnvelope<T>).record !== undefined
-  ) {
-    return (payload as JsonBinEnvelope<T>).record as T;
-  }
-
-  return payload as T;
-};
-
 export const useJsonFetch = <T,>(url?: string): FetchState<T> => {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState<boolean>(Boolean(url));
@@ -44,8 +27,7 @@ export const useJsonFetch = <T,>(url?: string): FetchState<T> => {
         if (!response.ok) {
           throw new Error(`Request failed: ${response.status}`);
         }
-        const rawJson = (await response.json()) as unknown;
-        const json = unwrapJsonBinRecord<T>(rawJson);
+        const json = (await response.json()) as T;
         if (isMounted) {
           setData(json);
           setError(null);
