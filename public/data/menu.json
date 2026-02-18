@@ -1,0 +1,873 @@
+[
+  {
+    "id": "pizza-margarita",
+    "categoryId": "pizza-classic",
+    "nameKey": "menu.margarita.name",
+    "descriptionKey": "menu.margarita.desc",
+    "price": 605,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/pizza-margarita.jpg",
+      "altKey": "menu.margarita.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "pizza-four-cheeses",
+    "categoryId": "pizza-classic",
+    "nameKey": "menu.fourCheeses.name",
+    "descriptionKey": "menu.fourCheeses.desc",
+    "price": 880,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/pizza-four-cheeses.jpg",
+      "altKey": "menu.fourCheeses.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "pizza-pepperoni",
+    "categoryId": "pizza-classic",
+    "nameKey": "menu.pepperoni.name",
+    "descriptionKey": "menu.pepperoni.desc",
+    "price": 770,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/pizza-pepperoni.jpg",
+      "altKey": "menu.pepperoni.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "pizza-calzone",
+    "categoryId": "pizza-classic",
+    "nameKey": "menu.calzone.name",
+    "descriptionKey": "menu.calzone.desc",
+    "price": 880,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/pizza-calzone.jpg",
+      "altKey": "menu.calzone.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "pizza-spicy-sausage",
+    "categoryId": "pizza-classic",
+    "nameKey": "menu.spicySausage.name",
+    "descriptionKey": "menu.spicySausage.desc",
+    "price": 770,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/pizza-spicy-sausage.jpg",
+      "altKey": "menu.spicySausage.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "pizza-hawaiian",
+    "categoryId": "pizza-classic",
+    "nameKey": "menu.hawaiian.name",
+    "descriptionKey": "menu.hawaiian.desc",
+    "price": 770,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/pizza-hawaiian.jpg",
+      "altKey": "menu.hawaiian.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "pizza-vegetable",
+    "categoryId": "pizza-classic",
+    "nameKey": "menu.vegetable.name",
+    "descriptionKey": "menu.vegetable.desc",
+    "price": 770,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/pizza-vegetable.jpg",
+      "altKey": "menu.vegetable.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "pizza-white",
+    "categoryId": "pizza-classic",
+    "nameKey": "menu.whitePizza.name",
+    "descriptionKey": "menu.whitePizza.desc",
+    "price": 550,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/pizza-white.jpg",
+      "altKey": "menu.whitePizza.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "pizza-ham-corn",
+    "categoryId": "pizza-classic",
+    "nameKey": "menu.hamCorn.name",
+    "descriptionKey": "menu.hamCorn.desc",
+    "price": 770,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/pizza-ham-corn.jpg",
+      "altKey": "menu.hamCorn.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "pizza-garlic-parsley",
+    "categoryId": "pizza-classic",
+    "nameKey": "menu.garlicParsley.name",
+    "descriptionKey": "menu.garlicParsley.desc",
+    "price": 605,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/pizza-garlic-parsley.jpg",
+      "altKey": "menu.garlicParsley.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "pizza-meat-lover",
+    "categoryId": "pizza-signature",
+    "nameKey": "menu.meatLover.name",
+    "descriptionKey": "menu.meatLover.desc",
+    "price": 990,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/pizza-meat-lover.jpg",
+      "altKey": "menu.meatLover.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "pizza-capricciosa",
+    "categoryId": "pizza-signature",
+    "nameKey": "menu.capricciosa.name",
+    "descriptionKey": "menu.capricciosa.desc",
+    "price": 880,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/pizza-capricciosa.jpg",
+      "altKey": "menu.capricciosa.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "pizza-crazy-chicken",
+    "categoryId": "pizza-signature",
+    "nameKey": "menu.crazyChicken.name",
+    "descriptionKey": "menu.crazyChicken.desc",
+    "price": 990,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/pizza-crazy-chicken.jpg",
+      "altKey": "menu.crazyChicken.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "pizza-napoli",
+    "categoryId": "pizza-signature",
+    "nameKey": "menu.napoli.name",
+    "descriptionKey": "menu.napoli.desc",
+    "price": 770,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/pizza-napoli.jpg",
+      "altKey": "menu.napoli.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "pizza-sea-delight",
+    "categoryId": "pizza-signature",
+    "nameKey": "menu.seaDelight.name",
+    "descriptionKey": "menu.seaDelight.desc",
+    "price": 1320,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/pizza-sea-delight.jpg",
+      "altKey": "menu.seaDelight.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "pizza-carbonara",
+    "categoryId": "pizza-signature",
+    "nameKey": "menu.carbonaraPizza.name",
+    "descriptionKey": "menu.carbonaraPizza.desc",
+    "price": 825,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/pizza-carbonara.jpg",
+      "altKey": "menu.carbonaraPizza.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "pizza-coral-reef",
+    "categoryId": "pizza-signature",
+    "nameKey": "menu.coralReef.name",
+    "descriptionKey": "menu.coralReef.desc",
+    "price": 825,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/pizza-coral-reef.jpg",
+      "altKey": "menu.coralReef.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "pizza-diavola",
+    "categoryId": "pizza-signature",
+    "nameKey": "menu.diavola.name",
+    "descriptionKey": "menu.diavola.desc",
+    "price": 770,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/pizza-diavola.jpg",
+      "altKey": "menu.diavola.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "salad-octopus",
+    "categoryId": "salads",
+    "nameKey": "menu.octopusSalad.name",
+    "descriptionKey": "menu.octopusSalad.desc",
+    "price": 880,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/salad-octopus.jpg",
+      "altKey": "menu.octopusSalad.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "salad-fish",
+    "categoryId": "salads",
+    "nameKey": "menu.fishSalad.name",
+    "descriptionKey": "menu.fishSalad.desc",
+    "price": 770,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/salad-fish.jpg",
+      "altKey": "menu.fishSalad.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "salad-chicken",
+    "categoryId": "salads",
+    "nameKey": "menu.chickenSalad.name",
+    "descriptionKey": "menu.chickenSalad.desc",
+    "price": 770,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/salad-chicken.jpg",
+      "altKey": "menu.chickenSalad.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "salad-bruschetta",
+    "categoryId": "salads",
+    "nameKey": "menu.bruschetta.name",
+    "descriptionKey": "menu.bruschetta.desc",
+    "price": 550,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/salad-bruschetta.jpg",
+      "altKey": "menu.bruschetta.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "salad-house",
+    "categoryId": "salads",
+    "nameKey": "menu.houseSalad.name",
+    "descriptionKey": "menu.houseSalad.desc",
+    "price": 880,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/salad-house.jpg",
+      "altKey": "menu.houseSalad.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "salad-caesar",
+    "categoryId": "salads",
+    "nameKey": "menu.caesar.name",
+    "descriptionKey": "menu.caesar.desc",
+    "price": 990,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/salad-caesar.jpg",
+      "altKey": "menu.caesar.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "salad-mixed",
+    "categoryId": "salads",
+    "nameKey": "menu.mixedSalad.name",
+    "descriptionKey": "menu.mixedSalad.desc",
+    "price": 385,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/salad-mixed.jpg",
+      "altKey": "menu.mixedSalad.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "salad-fruit",
+    "categoryId": "salads",
+    "nameKey": "menu.fruitSalad.name",
+    "descriptionKey": "menu.fruitSalad.desc",
+    "price": 660,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/salad-fruit.jpg",
+      "altKey": "menu.fruitSalad.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "salad-caprese",
+    "categoryId": "salads",
+    "nameKey": "menu.caprese.name",
+    "descriptionKey": "menu.caprese.desc",
+    "price": 770,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/salad-caprese.jpg",
+      "altKey": "menu.caprese.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "pasta-clams",
+    "categoryId": "pasta",
+    "nameKey": "menu.spaghettiClams.name",
+    "descriptionKey": "menu.spaghettiClams.desc",
+    "price": 1100,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/pasta-clams.jpg",
+      "altKey": "menu.spaghettiClams.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "pasta-bolognese",
+    "categoryId": "pasta",
+    "nameKey": "menu.spaghettiBolognese.name",
+    "descriptionKey": "menu.spaghettiBolognese.desc",
+    "price": 990,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/pasta-bolognese.jpg",
+      "altKey": "menu.spaghettiBolognese.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "pasta-carbonara",
+    "categoryId": "pasta",
+    "nameKey": "menu.spaghettiCarbonara.name",
+    "descriptionKey": "menu.spaghettiCarbonara.desc",
+    "price": 990,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/pasta-carbonara.jpg",
+      "altKey": "menu.spaghettiCarbonara.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "pasta-alfredo",
+    "categoryId": "pasta",
+    "nameKey": "menu.spaghettiAlfredo.name",
+    "descriptionKey": "menu.spaghettiAlfredo.desc",
+    "price": 880,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/pasta-alfredo.jpg",
+      "altKey": "menu.spaghettiAlfredo.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "pasta-shrimp",
+    "categoryId": "pasta",
+    "nameKey": "menu.spaghettiShrimp.name",
+    "descriptionKey": "menu.spaghettiShrimp.desc",
+    "price": 1100,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/pasta-shrimp.jpg",
+      "altKey": "menu.spaghettiShrimp.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "pasta-white-chicken",
+    "categoryId": "pasta",
+    "nameKey": "menu.spaghettiWhiteChicken.name",
+    "descriptionKey": "menu.spaghettiWhiteChicken.desc",
+    "price": 1100,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/pasta-white-chicken.jpg",
+      "altKey": "menu.spaghettiWhiteChicken.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "pasta-lasagna",
+    "categoryId": "pasta",
+    "nameKey": "menu.lasagna.name",
+    "descriptionKey": "menu.lasagna.desc",
+    "price": 1100,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/pasta-lasagna.jpg",
+      "altKey": "menu.lasagna.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "pasta-eggplant",
+    "categoryId": "pasta",
+    "nameKey": "menu.eggplantParmigiana.name",
+    "descriptionKey": "menu.eggplantParmigiana.desc",
+    "price": 880,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/pasta-eggplant.jpg",
+      "altKey": "menu.eggplantParmigiana.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "pasta-sea-land",
+    "categoryId": "pasta",
+    "nameKey": "menu.seaLand.name",
+    "descriptionKey": "menu.seaLand.desc",
+    "price": 1540,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/pasta-sea-land.jpg",
+      "altKey": "menu.seaLand.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "pasta-vegetarian",
+    "categoryId": "pasta",
+    "nameKey": "menu.vegetarianSpaghetti.name",
+    "descriptionKey": "menu.vegetarianSpaghetti.desc",
+    "price": 880,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/pasta-vegetarian.jpg",
+      "altKey": "menu.vegetarianSpaghetti.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "soup-chicken",
+    "categoryId": "soups",
+    "nameKey": "menu.chickenSoup.name",
+    "descriptionKey": "menu.chickenSoup.desc",
+    "price": 770,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/soup-chicken.jpg",
+      "altKey": "menu.chickenSoup.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "soup-fish",
+    "categoryId": "soups",
+    "nameKey": "menu.fishSoup.name",
+    "descriptionKey": "menu.fishSoup.desc",
+    "price": 1100,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/soup-fish.jpg",
+      "altKey": "menu.fishSoup.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "soup-seafood",
+    "categoryId": "soups",
+    "nameKey": "menu.seafoodSoup.name",
+    "descriptionKey": "menu.seafoodSoup.desc",
+    "price": 1430,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/soup-seafood.jpg",
+      "altKey": "menu.seafoodSoup.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "seafood-snapper-fillet",
+    "categoryId": "seafood",
+    "nameKey": "menu.snapperFillet.name",
+    "descriptionKey": "menu.snapperFillet.desc",
+    "price": 1650,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/seafood-snapper-fillet.jpg",
+      "altKey": "menu.snapperFillet.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "seafood-mahi-fillet",
+    "categoryId": "seafood",
+    "nameKey": "menu.mahiFillet.name",
+    "descriptionKey": "menu.mahiFillet.desc",
+    "price": 1320,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/seafood-mahi-fillet.jpg",
+      "altKey": "menu.mahiFillet.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "seafood-lemon-mahi",
+    "categoryId": "seafood",
+    "nameKey": "menu.lemonMahi.name",
+    "descriptionKey": "menu.lemonMahi.desc",
+    "price": 1430,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/seafood-lemon-mahi.jpg",
+      "altKey": "menu.lemonMahi.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "seafood-snapper-whole",
+    "categoryId": "seafood",
+    "nameKey": "menu.snapperWhole.name",
+    "descriptionKey": "menu.snapperWhole.desc",
+    "price": 1650,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/seafood-snapper-whole.jpg",
+      "altKey": "menu.snapperWhole.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "seafood-grouper-whole",
+    "categoryId": "seafood",
+    "nameKey": "menu.grouperWhole.name",
+    "descriptionKey": "menu.grouperWhole.desc",
+    "price": 1430,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/seafood-grouper-whole.jpg",
+      "altKey": "menu.grouperWhole.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "seafood-fish-finger",
+    "categoryId": "seafood",
+    "nameKey": "menu.fishFinger.name",
+    "descriptionKey": "menu.fishFinger.desc",
+    "price": 880,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/seafood-fish-finger.jpg",
+      "altKey": "menu.fishFinger.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "seafood-cream-shrimp",
+    "categoryId": "seafood",
+    "nameKey": "menu.creamShrimp.name",
+    "descriptionKey": "menu.creamShrimp.desc",
+    "price": 1320,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/seafood-cream-shrimp.jpg",
+      "altKey": "menu.creamShrimp.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "seafood-mixed-grill",
+    "categoryId": "seafood",
+    "nameKey": "menu.mixedGrill.name",
+    "descriptionKey": "menu.mixedGrill.desc",
+    "price": 2750,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/seafood-mixed-grill.jpg",
+      "altKey": "menu.mixedGrill.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "seafood-lobster",
+    "categoryId": "seafood",
+    "nameKey": "menu.lobster.name",
+    "descriptionKey": "menu.lobster.desc",
+    "price": 2200,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/seafood-lobster.jpg",
+      "altKey": "menu.lobster.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "seafood-coconut-fish",
+    "categoryId": "seafood",
+    "nameKey": "menu.coconutFish.name",
+    "descriptionKey": "menu.coconutFish.desc",
+    "price": 1760,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/seafood-coconut-fish.jpg",
+      "altKey": "menu.coconutFish.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "seafood-salpicon",
+    "categoryId": "seafood",
+    "nameKey": "menu.salpicon.name",
+    "descriptionKey": "menu.salpicon.desc",
+    "price": 1870,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/seafood-salpicon.jpg",
+      "altKey": "menu.salpicon.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "seafood-casserole",
+    "categoryId": "seafood",
+    "nameKey": "menu.casserole.name",
+    "descriptionKey": "menu.casserole.desc",
+    "price": 1980,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/seafood-casserole.jpg",
+      "altKey": "menu.casserole.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "chicken-wings-4",
+    "categoryId": "chicken",
+    "nameKey": "menu.wings4.name",
+    "descriptionKey": "menu.wings4.desc",
+    "price": 770,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/chicken-wings-4.jpg",
+      "altKey": "menu.wings4.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "chicken-wings-6",
+    "categoryId": "chicken",
+    "nameKey": "menu.wings6.name",
+    "descriptionKey": "menu.wings6.desc",
+    "price": 990,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/chicken-wings-6.jpg",
+      "altKey": "menu.wings6.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "chicken-grilled-breast",
+    "categoryId": "chicken",
+    "nameKey": "menu.grilledBreast.name",
+    "descriptionKey": "menu.grilledBreast.desc",
+    "price": 880,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/chicken-grilled-breast.jpg",
+      "altKey": "menu.grilledBreast.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "chicken-breaded-breast",
+    "categoryId": "chicken",
+    "nameKey": "menu.breadedBreast.name",
+    "descriptionKey": "menu.breadedBreast.desc",
+    "price": 935,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/chicken-breaded-breast.jpg",
+      "altKey": "menu.breadedBreast.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "chicken-mixed-meat-grill",
+    "categoryId": "chicken",
+    "nameKey": "menu.mixedMeatGrill.name",
+    "descriptionKey": "menu.mixedMeatGrill.desc",
+    "price": 1870,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/chicken-mixed-meat-grill.jpg",
+      "altKey": "menu.mixedMeatGrill.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "chicken-hamburger",
+    "categoryId": "chicken",
+    "nameKey": "menu.hamburger.name",
+    "descriptionKey": "menu.hamburger.desc",
+    "price": 770,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/chicken-hamburger.jpg",
+      "altKey": "menu.hamburger.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "chicken-quinoa",
+    "categoryId": "chicken",
+    "nameKey": "menu.chickenQuinoa.name",
+    "descriptionKey": "menu.chickenQuinoa.desc",
+    "price": 990,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/chicken-quinoa.jpg",
+      "altKey": "menu.chickenQuinoa.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "chicken-fajita",
+    "categoryId": "chicken",
+    "nameKey": "menu.chickenFajita.name",
+    "descriptionKey": "menu.chickenFajita.desc",
+    "price": 880,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/chicken-fajita.jpg",
+      "altKey": "menu.chickenFajita.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "side-tostones",
+    "categoryId": "sides",
+    "nameKey": "menu.tostones.name",
+    "descriptionKey": "menu.tostones.desc",
+    "price": 275,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/side-tostones.jpg",
+      "altKey": "menu.tostones.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "side-fries",
+    "categoryId": "sides",
+    "nameKey": "menu.fries.name",
+    "descriptionKey": "menu.fries.desc",
+    "price": 275,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/side-fries.jpg",
+      "altKey": "menu.fries.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "side-rice",
+    "categoryId": "sides",
+    "nameKey": "menu.whiteRice.name",
+    "descriptionKey": "menu.whiteRice.desc",
+    "price": 275,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/side-rice.jpg",
+      "altKey": "menu.whiteRice.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "side-grilled-vegetables",
+    "categoryId": "sides",
+    "nameKey": "menu.grilledVegetables.name",
+    "descriptionKey": "menu.grilledVegetables.desc",
+    "price": 440,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/side-grilled-vegetables.jpg",
+      "altKey": "menu.grilledVegetables.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "extra-coffee-small",
+    "categoryId": "extras",
+    "nameKey": "menu.coffeeSmall.name",
+    "descriptionKey": "menu.coffeeSmall.desc",
+    "price": 80,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/extra-coffee-small.jpg",
+      "altKey": "menu.coffeeSmall.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "extra-coffee-large",
+    "categoryId": "extras",
+    "nameKey": "menu.coffeeLarge.name",
+    "descriptionKey": "menu.coffeeLarge.desc",
+    "price": 110,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/extra-coffee-large.jpg",
+      "altKey": "menu.coffeeLarge.alt"
+    },
+    "available": true
+  },
+  {
+    "id": "extra-sauces",
+    "categoryId": "extras",
+    "nameKey": "menu.extraSauces.name",
+    "descriptionKey": "menu.extraSauces.desc",
+    "price": 110,
+    "currency": "DOP",
+    "image": {
+      "url": "https://res.cloudinary.com/896279918126553/image/upload/c_fill,w_600,h_400,q_auto,f_auto/bavarotti/extra-sauces.jpg",
+      "altKey": "menu.extraSauces.alt"
+    },
+    "available": true
+  }
+]

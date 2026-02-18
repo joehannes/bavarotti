@@ -1,0 +1,11 @@
+[
+  { "id": "pizza-classic", "labelKey": "category.pizzaClassic", "descriptionKey": "category.pizzaClassic.desc" },
+  { "id": "pizza-signature", "labelKey": "category.pizzaSignature", "descriptionKey": "category.pizzaSignature.desc" },
+  { "id": "salads", "labelKey": "category.salads", "descriptionKey": "category.salads.desc" },
+  { "id": "pasta", "labelKey": "category.pasta", "descriptionKey": "category.pasta.desc" },
+  { "id": "soups", "labelKey": "category.soups", "descriptionKey": "category.soups.desc" },
+  { "id": "seafood", "labelKey": "category.seafood", "descriptionKey": "category.seafood.desc" },
+  { "id": "chicken", "labelKey": "category.chicken", "descriptionKey": "category.chicken.desc" },
+  { "id": "sides", "labelKey": "category.sides", "descriptionKey": "category.sides.desc" },
+  { "id": "extras", "labelKey": "category.extras", "descriptionKey": "category.extras.desc" }
+]
