@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Categories",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["id", "labelKey"],
+    "properties": {
+      "id": { "type": "string" },
+      "labelKey": { "type": "string" },
+      "descriptionKey": { "type": "string" }
+    }
+  }
+}

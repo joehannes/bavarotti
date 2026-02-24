@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Menu",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "id",
+      "categoryId",
+      "nameKey",
+      "descriptionKey",
+      "price",
+      "currency",
+      "image",
+      "available"
+    ],
+    "properties": {
+      "id": { "type": "string" },
+      "categoryId": { "type": "string" },
+      "nameKey": { "type": "string" },
+      "descriptionKey": { "type": "string" },
+      "price": { "type": "number", "minimum": 0 },
+      "currency": { "type": "string" },
+      "image": {
+        "type": "object",
+        "required": ["url", "altKey"],
+        "properties": {
+          "url": { "type": "string", "format": "uri" },
+          "altKey": { "type": "string" }
+        }
+      },
+      "available": { "type": "boolean" },
+      "tags": { "type": "array", "items": { "type": "string" } }
+    }
+  }
+}
