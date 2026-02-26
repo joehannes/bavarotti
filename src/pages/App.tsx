@@ -23,20 +23,6 @@ const jsonUrls = {
   translationsEs: import.meta.env.VITE_JSONBIN_TRANSLATIONS_ES_URL,
 };
 
-
-const normalizeTranslations = (input: unknown): Translations => {
-  if (!input || typeof input !== 'object' || Array.isArray(input)) {
-    return {};
-  }
-
-  return Object.fromEntries(
-    Object.entries(input as Record<string, unknown>).map(([key, value]) => [
-      key,
-      typeof value === 'string' ? value : '',
-    ]),
-  );
-};
-
 const App = () => {
   const [language, setLanguage] = useState<Language>(getStoredLanguage());
   const [orderItems, setOrderItems] = useState<OrderItem[]>([]);
@@ -50,7 +36,7 @@ const App = () => {
   const specialsState = useJsonFetch<Special[]>(jsonUrls.specials);
   const translationsState = useJsonFetch<Translations>(translationsUrl);
 
-  const translations = normalizeTranslations(translationsState.data);
+  const translations = translationsState.data ?? {};
 
   const handleLanguageChange = (nextLanguage: Language) => {
     setLanguage(nextLanguage);
