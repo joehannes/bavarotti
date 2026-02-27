@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Specials",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["id", "nameKey", "descriptionKey", "image", "available"],
+    "properties": {
+      "id": { "type": "string" },
+      "nameKey": { "type": "string" },
+      "descriptionKey": { "type": "string" },
+      "image": {
+        "type": "object",
+        "required": ["url", "altKey"],
+        "properties": {
+          "url": { "type": "string", "format": "uri" },
+          "altKey": { "type": "string" }
+        }
+      },
+      "available": { "type": "boolean" }
+    }
+  }
+}
