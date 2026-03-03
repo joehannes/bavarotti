@@ -1,12 +1,14 @@
-const jsonBinHeaders = (apiKey?: string) =>
-  apiKey
-    ? {
-        'Content-Type': 'application/json',
-        'X-Master-Key': apiKey,
-      }
-    : {
-        'Content-Type': 'application/json',
-      };
+const jsonBinHeaders = (apiKey?: string): Record<string, string> => {
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+  };
+
+  if (apiKey) {
+    headers['X-Master-Key'] = apiKey;
+  }
+
+  return headers;
+};
 
 export const updateJsonBin = async <T,>(url: string, apiKey: string, payload: T): Promise<T> => {
   const response = await fetch(url, {

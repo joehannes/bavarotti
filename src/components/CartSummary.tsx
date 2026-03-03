@@ -7,8 +7,8 @@ const buildWhatsAppMessage = (
   languageLabel: string,
   note?: string,
 ) => {
-  const replacePlaceholder = (template: string, value: string) =>
-    template.replace('{value}', value);
+  const replacePlaceholder = (template: string | undefined, value: string) =>
+    (template ?? '{value}').replace('{value}', value);
   const lines = orderItems.map((order) => {
     const translatedName = translations[order.item.nameKey] ?? order.item.nameKey;
     return `- ${order.quantity}x ${translatedName}`;
@@ -69,7 +69,7 @@ const CartSummary = ({
     <aside className="cart">
       <div className="cart__header">
         <h3>{translations['cart.title']}</h3>
-        <span>{translations['cart.items'].replace('{count}', String(totalItems))}</span>
+        <span>{(translations['cart.items'] ?? '{count} items').replace('{count}', String(totalItems))}</span>
       </div>
       {orderItems.length === 0 ? (
         <p className="cart__empty">{translations['cart.empty']}</p>
@@ -88,9 +88,9 @@ const CartSummary = ({
         href={orderItems.length === 0 ? '#' : whatsappUrl}
         aria-disabled={orderItems.length === 0}
       >
-        {translations['cta.order']}
+        {translations['cta.order'] ?? 'Order via WhatsApp'}
       </a>
-      <p className="cart__note">{translations['cart.note']}</p>
+      <p className="cart__note">{translations['cart.note'] ?? 'We will confirm your order via WhatsApp.'}</p>
     </aside>
   );
 };
