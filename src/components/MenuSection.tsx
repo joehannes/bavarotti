@@ -9,15 +9,19 @@ type MenuSectionProps = {
   orderItems: OrderItem[];
 };
 
-const MenuSection = ({ translations, categories, items, onAdd, orderItems }: MenuSectionProps) => (
+const MenuSection = ({ translations, categories, items, onAdd, orderItems }: MenuSectionProps) => {
+  const safeCategories = Array.isArray(categories) ? categories : [];
+  const safeItems = Array.isArray(items) ? items : [];
+
+  return (
   <section className="section" id="menu">
     <SectionHeading
       title={translations['menu.title']}
       subtitle={translations['menu.subtitle']}
     />
     <div className="menu">
-      {categories.map((category) => {
-        const categoryItems = items.filter((item) => item.categoryId === category.id);
+      {safeCategories.map((category) => {
+        const categoryItems = safeItems.filter((item) => item.categoryId === category.id);
         return (
           <div className="menu__category" key={category.id}>
             <div className="menu__category-header">
@@ -34,11 +38,13 @@ const MenuSection = ({ translations, categories, items, onAdd, orderItems }: Men
                     key={item.id}
                     className={`menu-card ${item.available ? '' : 'menu-card--disabled'}`}
                   >
-                    <img
-                      src={item.image.url}
-                      alt={translations[item.image.altKey] ?? item.image.altKey}
-                      loading="lazy"
-                    />
+                    {item.image ? (
+                      <img
+                        src={item.image.url}
+                        alt={translations[item.image.altKey] ?? item.image.altKey}
+                        loading="lazy"
+                      />
+                    ) : null}
                     <div className="menu-card__content">
                       <div className="menu-card__header">
                         <h4>{translations[item.nameKey] ?? item.nameKey}</h4>
@@ -46,7 +52,9 @@ const MenuSection = ({ translations, categories, items, onAdd, orderItems }: Men
                           {item.currency} {item.price.toFixed(2)}
                         </span>
                       </div>
-                      <p>{translations[item.descriptionKey] ?? item.descriptionKey}</p>
+                      {item.descriptionKey ? (
+                        <p>{translations[item.descriptionKey] ?? item.descriptionKey}</p>
+                      ) : null}
                       <div className="menu-card__footer">
                         <button
                           className="btn btn--ghost"
@@ -73,6 +81,7 @@ const MenuSection = ({ translations, categories, items, onAdd, orderItems }: Men
       })}
     </div>
   </section>
-);
+  );
+};
 
 export default MenuSection;

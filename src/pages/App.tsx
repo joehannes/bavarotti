@@ -36,7 +36,13 @@ const App = () => {
   const specialsState = useJsonFetch<Special[]>(jsonUrls.specials);
   const translationsState = useJsonFetch<Translations>(translationsUrl);
 
-  const translations = translationsState.data ?? {};
+  const translations =
+    translationsState.data && typeof translationsState.data === 'object' && !Array.isArray(translationsState.data)
+      ? translationsState.data
+      : {};
+  const menuItems = Array.isArray(menuState.data) ? menuState.data : [];
+  const categories = Array.isArray(categoriesState.data) ? categoriesState.data : [];
+  const specials = Array.isArray(specialsState.data) ? specialsState.data : [];
 
   const handleLanguageChange = (nextLanguage: Language) => {
     setLanguage(nextLanguage);
@@ -88,12 +94,12 @@ const App = () => {
       <div className="content">
         <MenuSection
           translations={translations}
-          categories={categoriesState.data ?? []}
-          items={menuState.data ?? []}
+          categories={categories}
+          items={menuItems}
           onAdd={handleAddToOrder}
           orderItems={orderItems}
         />
-        <SpecialsSection translations={translations} specials={specialsState.data ?? []} />
+        <SpecialsSection translations={translations} specials={specials} />
         <AboutSection translations={translations} />
       </div>
       <section className="section section--cart" id="order">
@@ -106,8 +112,8 @@ const App = () => {
             languageLabel={translations[`language.${language}`] ?? language}
           />
           <div className="cart__helper">
-            <h3>{translations['cart.helpTitle']}</h3>
-            <p>{translations['cart.helpText']}</p>
+            <h3>{translations['cart.helpTitle'] ?? 'Order details'}</h3>
+            <p>{translations['cart.helpText'] ?? 'We will confirm your order on WhatsApp before preparing it.'}</p>
           </div>
         </div>
       </section>

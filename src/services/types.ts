@@ -8,10 +8,10 @@ export type MenuItem = {
   id: string;
   categoryId: string;
   nameKey: string;
-  descriptionKey: string;
+  descriptionKey?: string;
   price: number;
   currency: string;
-  image: {
+  image?: {
     url: string;
     altKey: string;
   };
@@ -23,7 +23,7 @@ export type Special = {
   id: string;
   nameKey: string;
   descriptionKey: string;
-  image: {
+  image?: {
     url: string;
     altKey: string;
   };
