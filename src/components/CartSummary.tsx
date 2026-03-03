@@ -11,8 +11,13 @@ const buildWhatsAppMessage = (
     (template ?? '{value}').replace('{value}', value);
   const lines = orderItems.map((order) => {
     const translatedName = translations[order.item.nameKey] ?? order.item.nameKey;
-    return `- ${order.quantity}x ${translatedName}`;
+    const lineTotal = order.quantity * order.item.price;
+    return `- ${order.quantity}x ${translatedName} (${order.item.currency} ${lineTotal.toFixed(2)})`;
   });
+
+  const total = orderItems.reduce((sum, order) => sum + order.quantity * order.item.price, 0);
+  const currency = orderItems[0]?.item.currency ?? '';
+
   const message = [
     translations['whatsapp.greeting'] ?? 'Hello 👋',
     replacePlaceholder(
@@ -22,6 +27,7 @@ const buildWhatsAppMessage = (
     '',
     ...lines,
     '',
+    `${translations['cart.total'] ?? 'Total'}: ${currency} ${total.toFixed(2)}`,
     replacePlaceholder(
       translations['whatsapp.language'] ?? 'Language: {value}',
       languageLabel,
@@ -29,10 +35,7 @@ const buildWhatsAppMessage = (
   ];
 
   if (note) {
-    message.push(
-      '',
-      replacePlaceholder(translations['whatsapp.note'] ?? 'Note: {value}', note),
-    );
+    message.push('', replacePlaceholder(translations['whatsapp.note'] ?? 'Note: {value}', note));
   }
 
   return message.join('\n');
@@ -54,15 +57,10 @@ const CartSummary = ({
   languageLabel,
 }: CartSummaryProps) => {
   const totalItems = orderItems.reduce((acc, order) => acc + order.quantity, 0);
-  const message = buildWhatsAppMessage(
-    restaurantName,
-    orderItems,
-    translations,
-    languageLabel,
-  );
-  const encodedMessage = encodeURIComponent(
-    message.replace(/\n\n/g, '\n\n'),
-  );
+  const total = orderItems.reduce((sum, order) => sum + order.quantity * order.item.price, 0);
+  const currency = orderItems[0]?.item.currency ?? '';
+  const message = buildWhatsAppMessage(restaurantName, orderItems, translations, languageLabel);
+  const encodedMessage = encodeURIComponent(message);
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
 
   return (
@@ -75,14 +73,28 @@ const CartSummary = ({
         <p className="cart__empty">{translations['cart.empty']}</p>
       ) : (
         <ul className="cart__list">
-          {orderItems.map((order) => (
-            <li key={order.item.id}>
-              <span>{translations[order.item.nameKey] ?? order.item.nameKey}</span>
-              <span>{order.quantity}x</span>
-            </li>
-          ))}
+          {orderItems.map((order) => {
+            const lineTotal = order.item.price * order.quantity;
+            return (
+              <li key={order.item.id}>
+                <div>
+                  <span>{translations[order.item.nameKey] ?? order.item.nameKey}</span>
+                  <small>{order.quantity}x</small>
+                </div>
+                <span>
+                  {order.item.currency} {lineTotal.toFixed(2)}
+                </span>
+              </li>
+            );
+          })}
         </ul>
       )}
+      <div className="cart__total">
+        <strong>{translations['cart.total'] ?? 'Total'}</strong>
+        <strong>
+          {currency} {total.toFixed(2)}
+        </strong>
+      </div>
       <a
         className={`btn btn--primary ${orderItems.length === 0 ? 'btn--disabled' : ''}`}
         href={orderItems.length === 0 ? '#' : whatsappUrl}

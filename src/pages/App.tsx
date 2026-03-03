@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Hero from '../components/Hero';
 import MenuSection from '../components/MenuSection';
 import SpecialsSection from '../components/SpecialsSection';
@@ -6,6 +6,7 @@ import AboutSection from '../components/AboutSection';
 import Footer from '../components/Footer';
 import CartSummary from '../components/CartSummary';
 import AdminPanel from '../components/AdminPanel';
+import TopNav from '../components/TopNav';
 import { useJsonFetch } from '../hooks/useJsonFetch';
 import type { Category, MenuItem, OrderItem, Special, Translations } from '../services/types';
 import { getStoredLanguage, setStoredLanguage, type Language } from '../services/i18n';
@@ -14,6 +15,13 @@ const restaurantName = import.meta.env.VITE_RESTAURANT_NAME ?? 'Bavarotti';
 const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER ?? '';
 const adminOtp = import.meta.env.VITE_ADMIN_OTP ?? '';
 const jsonBinApiKey = import.meta.env.VITE_JSONBIN_API_KEY ?? '';
+
+const cloudinary = {
+  cloudName: import.meta.env.VITE_CLOUDINARY_CLOUD_NAME ?? '',
+  apiKey: import.meta.env.VITE_CLOUDINARY_API_KEY ?? '',
+  apiSecret: import.meta.env.VITE_CLOUDINARY_API_SECRET ?? '',
+  folder: import.meta.env.VITE_CLOUDINARY_FOLDER ?? 'bavarotti',
+};
 
 const jsonUrls = {
   menu: import.meta.env.VITE_JSONBIN_MENU_URL,
@@ -28,8 +36,7 @@ const App = () => {
   const [orderItems, setOrderItems] = useState<OrderItem[]>([]);
   const [showAdmin, setShowAdmin] = useState(false);
 
-  const translationsUrl =
-    language === 'en' ? jsonUrls.translationsEn : jsonUrls.translationsEs;
+  const translationsUrl = language === 'en' ? jsonUrls.translationsEn : jsonUrls.translationsEs;
 
   const menuState = useJsonFetch<MenuItem[]>(jsonUrls.menu);
   const categoriesState = useJsonFetch<Category[]>(jsonUrls.categories);
@@ -54,9 +61,7 @@ const App = () => {
       const existing = prev.find((order) => order.item.id === item.id);
       if (existing) {
         return prev.map((order) =>
-          order.item.id === item.id
-            ? { ...order, quantity: order.quantity + 1 }
-            : order,
+          order.item.id === item.id ? { ...order, quantity: order.quantity + 1 } : order,
         );
       }
       return [...prev, { item, quantity: 1 }];
@@ -69,16 +74,10 @@ const App = () => {
   };
 
   const loading =
-    menuState.loading ||
-    categoriesState.loading ||
-    specialsState.loading ||
-    translationsState.loading;
+    menuState.loading || categoriesState.loading || specialsState.loading || translationsState.loading;
 
   const hasError =
-    menuState.error ||
-    categoriesState.error ||
-    specialsState.error ||
-    translationsState.error;
+    menuState.error || categoriesState.error || specialsState.error || translationsState.error;
 
   if (loading && !translationsState.data) {
     return <div className="loading" aria-busy="true" />;
@@ -90,6 +89,13 @@ const App = () => {
 
   return (
     <div className="app">
+      <TopNav
+        translations={translations}
+        language={language}
+        onLanguageChange={handleLanguageChange}
+        onOrderClick={handleOrderClick}
+        brandName={restaurantName}
+      />
       <Hero translations={translations} onOrderClick={handleOrderClick} />
       <div className="content">
         <MenuSection
@@ -128,6 +134,7 @@ const App = () => {
           translations={translations}
           otp={adminOtp}
           apiKey={jsonBinApiKey}
+          cloudinary={cloudinary}
           resourceUrls={{
             menu: jsonUrls.menu,
             categories: jsonUrls.categories,

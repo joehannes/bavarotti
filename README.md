@@ -1,12 +1,12 @@
 # Bavarotti Micro-Website
 
-A frontend-only, WhatsApp-first menu and ordering experience for an Italian + Dominican seafood + Mexican concept. Content is fully driven by JSONBin and Cloudinary.
+A frontend-only, WhatsApp-first menu and ordering experience for an Italian + Dominican seafood + Mexican concept. Content is driven by JSONBin and image hosting on Cloudinary.
 
 ## Stack
 
 - React 18 + Vite + TypeScript
 - Cloudflare Pages compatible
-- No backend, no auth, no payments
+- No backend, no online payments
 
 ## Getting Started
 
@@ -17,59 +17,71 @@ npm run dev
 
 ## Environment Variables
 
-Copy `.env.example` to `.env.local` and fill in your JSONBin + WhatsApp values.
+Copy `.env.example` to `.env.local` and fill values.
 
 | Variable | Purpose |
 | --- | --- |
-| `VITE_RESTAURANT_NAME` | Restaurant name in WhatsApp messages |
-| `VITE_WHATSAPP_NUMBER` | Phone number in international format |
-| `VITE_ADMIN_OTP` | Hardcoded OTP for admin console |
-| `VITE_JSONBIN_API_KEY` | JSONBin master key for updates |
-| `VITE_JSONBIN_*_URL` | JSONBin bin URLs for menu, categories, specials, translations |
+| `VITE_RESTAURANT_NAME` | Restaurant/brand label in navbar and WhatsApp text |
+| `VITE_WHATSAPP_NUMBER` | WhatsApp number in international format |
+| `VITE_ADMIN_OTP` | One-time password to unlock admin panel |
+| `VITE_JSONBIN_API_KEY` | JSONBin X-Master-Key for CRUD updates |
+| `VITE_JSONBIN_*_URL` | JSONBin resource URLs for menu/categories/specials/translations |
+| `VITE_CLOUDINARY_CLOUD_NAME` | Cloudinary cloud name |
+| `VITE_CLOUDINARY_API_KEY` | Cloudinary API key |
+| `VITE_CLOUDINARY_API_SECRET` | Cloudinary API secret |
+| `VITE_CLOUDINARY_FOLDER` | Optional Cloudinary upload folder (default `bavarotti`) |
 
-## Content Sources
+> If your current `.env` uses `BYTE_*` names, map them to these `VITE_*` names for the browser app.
 
-### JSON Schemas
+## Required Public Assets
 
-- `src/schemas/menu.schema.json`
-- `src/schemas/categories.schema.json`
-- `src/schemas/specials.schema.json`
-- `src/schemas/translations.schema.json`
+Place these files in `/public`:
 
-### Example JSON
+- `babawati_icon.jpeg` (navbar logo)
+- `hero_desktop.jpg` (desktop hero background)
+- `hero_mobile.jpg` (mobile hero background)
 
-- `src/data/menu.example.json`
-- `src/data/categories.example.json`
-- `src/data/specials.example.json`
-- `src/data/translations.en.example.json`
-- `src/data/translations.es.example.json`
+The app renders even if images are missing, but visual polish depends on these files.
 
-Optional local demo data is mirrored in `public/data` for quick previews without JSONBin.
+## Admin Panel Features
 
-### JSONBin Usage
+Use the **Admin** button in footer:
 
-1. Create bins for each JSON dataset.
-2. Paste the example JSON as a starting point.
-3. Use the bin URL in the corresponding `VITE_JSONBIN_*_URL` variable.
-4. The Admin console (footer link) lets you paste updated JSON and save directly to JSONBin with your master key.
+1. Enter OTP (`VITE_ADMIN_OTP`).
+2. **Menu CRUD section**:
+   - Create/edit/delete menu items
+   - Change id/category/nameKey/descriptionKey/pricing/availability
+   - Upload image to Cloudinary directly from the panel
+   - Delete currently assigned Cloudinary image
+   - Save full menu back to JSONBin
+3. **Raw JSON editor**:
+   - Update categories, specials, translations, or any JSONBin resource directly
+
+### Security note
+
+This is a frontend-only app. Cloudinary secret in browser code is convenient for owner-operated tools, but not secure for public untrusted admin access. For production-hard security, proxy uploads/signatures through a backend.
+
+## UX/UI Enhancements Included
+
+- Fixed, translucent top menu bar (logo + brand + order shortcut + language switch)
+- Responsive hero background image (mobile/desktop)
+- Lightweight parallax effect driven by scroll CSS var
+- Refined spacing/typography/card styling
+- Cart now shows line totals and order total before WhatsApp checkout
 
 ## WhatsApp Ordering Flow
 
-1. Guests add items to the local cart.
-2. The “Order via WhatsApp” button opens `https://wa.me/` with a prefilled message containing the restaurant name, selected items, and current language.
-3. No checkout or online payment is required.
-
-## Cloudinary Images
-
-Menu, specials, and hero images use public Cloudinary URLs. To add more images, upload to Cloudinary and paste the public URL into your JSON data.
+1. Guests add items to local cart.
+2. Cart shows each line total and full total.
+3. “Order via WhatsApp” opens `https://wa.me/` with a prefilled message (items + total + language).
 
 ## Deploy to Cloudflare Pages
 
-1. Push the repo to GitHub.
+1. Push repo to GitHub.
 2. Create a Cloudflare Pages project.
-3. Set build command to `npm run build`.
-4. Set build output directory to `dist`.
-5. Add the same environment variables from `.env.example` in Cloudflare Pages.
+3. Build command: `npm run build`
+4. Output directory: `dist`
+5. Add the same `VITE_*` variables in Cloudflare Pages settings.
 6. Deploy.
 
 ## Scripts
