@@ -96,7 +96,7 @@ const CartSummary = ({
         </strong>
       </div>
       <a
-        className={`btn btn--primary ${orderItems.length === 0 ? 'btn--disabled' : ''}`}
+        className={`btn btn--wa ${orderItems.length === 0 ? 'btn--disabled' : ''}`}
         href={orderItems.length === 0 ? '#' : whatsappUrl}
         aria-disabled={orderItems.length === 0}
       >

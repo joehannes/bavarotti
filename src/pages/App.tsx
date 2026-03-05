@@ -156,6 +156,7 @@ const App = () => {
       <Footer
         translations={translations}
         language={language}
+        whatsappNumber={whatsappNumber}
         onLanguageChange={handleLanguageChange}
         onAdminToggle={() => setShowAdmin(true)}
       />
