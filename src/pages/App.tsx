@@ -46,6 +46,13 @@ const cloudinary = {
   folder: env.VITE_CLOUDINARY_FOLDER ?? 'bavarotti',
 };
 
+const cloudinary = {
+  cloudName: import.meta.env.VITE_CLOUDINARY_CLOUD_NAME ?? '',
+  apiKey: import.meta.env.VITE_CLOUDINARY_API_KEY ?? '',
+  apiSecret: import.meta.env.VITE_CLOUDINARY_API_SECRET ?? '',
+  folder: import.meta.env.VITE_CLOUDINARY_FOLDER ?? 'bavarotti',
+};
+
 const jsonUrls = {
   menu: env.VITE_JSONBIN_MENU_URL,
   categories: env.VITE_JSONBIN_CATEGORIES_URL,
@@ -70,21 +77,9 @@ const App = () => {
     translationsState.data && typeof translationsState.data === 'object' && !Array.isArray(translationsState.data)
       ? translationsState.data
       : {};
-
   const menuItems = Array.isArray(menuState.data) ? menuState.data : [];
   const categories = Array.isArray(categoriesState.data) ? categoriesState.data : [];
   const specials = Array.isArray(specialsState.data) ? specialsState.data : [];
-
-  useEffect(() => {
-    const onScroll = () => {
-      const offset = Math.min(window.scrollY * 0.2, 80);
-      document.documentElement.style.setProperty('--parallax-offset', `${offset}px`);
-    };
-
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   const handleLanguageChange = (nextLanguage: Language) => {
     setLanguage(nextLanguage);
