@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Hero from '../components/Hero';
 import MenuSection from '../components/MenuSection';
 import SpecialsSection from '../components/SpecialsSection';
@@ -11,10 +11,40 @@ import { useJsonFetch } from '../hooks/useJsonFetch';
 import type { Category, MenuItem, OrderItem, Special, Translations } from '../services/types';
 import { getStoredLanguage, setStoredLanguage, type Language } from '../services/i18n';
 
-const restaurantName = import.meta.env.VITE_RESTAURANT_NAME ?? 'Bavarotti';
-const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER ?? '';
-const adminOtp = import.meta.env.VITE_ADMIN_OTP ?? '';
-const jsonBinApiKey = import.meta.env.VITE_JSONBIN_API_KEY ?? '';
+const env = import.meta.env;
+
+const restaurantName = env.VITE_RESTAURANT_NAME ?? 'Bavarotti';
+const whatsappNumber = env.VITE_WHATSAPP_NUMBER ?? '';
+const adminOtp =
+  env.WHITE_ADMIN_OTP ??
+  env.white_admin_otp ??
+  env.VITE_ADMIN_OTP ??
+  '';
+
+const jsonBinApiKey =
+  env.WHITE_JSONBIN_KEY ??
+  env.white_jsonbin_key ??
+  env.VITE_JSONBIN_API_KEY ??
+  '';
+
+const cloudinary = {
+  cloudName:
+    env.WHITE_CLOUDINARY_CLOUD_NAME ??
+    env.white_cloudinary_cloud_name ??
+    env.VITE_CLOUDINARY_CLOUD_NAME ??
+    '',
+  apiKey:
+    env.WHITE_CLOUDINARY_API_TOKEN ??
+    env.white_cloudinary_api_token ??
+    env.VITE_CLOUDINARY_API_KEY ??
+    '',
+  apiSecret:
+    env.WHITE_CLOUDINARY_API_SECRET ??
+    env.white_cloudinary_api_secret ??
+    env.VITE_CLOUDINARY_API_SECRET ??
+    '',
+  folder: env.VITE_CLOUDINARY_FOLDER ?? 'bavarotti',
+};
 
 const cloudinary = {
   cloudName: import.meta.env.VITE_CLOUDINARY_CLOUD_NAME ?? '',
@@ -24,11 +54,11 @@ const cloudinary = {
 };
 
 const jsonUrls = {
-  menu: import.meta.env.VITE_JSONBIN_MENU_URL,
-  categories: import.meta.env.VITE_JSONBIN_CATEGORIES_URL,
-  specials: import.meta.env.VITE_JSONBIN_SPECIALS_URL,
-  translationsEn: import.meta.env.VITE_JSONBIN_TRANSLATIONS_EN_URL,
-  translationsEs: import.meta.env.VITE_JSONBIN_TRANSLATIONS_ES_URL,
+  menu: env.VITE_JSONBIN_MENU_URL,
+  categories: env.VITE_JSONBIN_CATEGORIES_URL,
+  specials: env.VITE_JSONBIN_SPECIALS_URL,
+  translationsEn: env.VITE_JSONBIN_TRANSLATIONS_EN_URL,
+  translationsEs: env.VITE_JSONBIN_TRANSLATIONS_ES_URL,
 };
 
 const App = () => {

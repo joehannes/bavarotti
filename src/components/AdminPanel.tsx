@@ -81,12 +81,19 @@ const AdminPanel = ({ translations, otp, apiKey, cloudinary, resourceUrls, onClo
   const selectedMenuItem = menuDraft.find((item) => item.id === selectedMenuId);
 
   const handleUnlock = () => {
+    if (!otp) {
+      setError('Admin OTP is missing in environment variables.');
+      return;
+    }
+
     if (inputOtp.trim() === otp) {
       setIsUnlocked(true);
       setError('');
     } else {
       setError(translations['admin.otpError'] ?? 'Invalid OTP');
     }
+
+    setError(translations['admin.otpError'] ?? 'Invalid OTP');
   };
 
   const handleRawSubmit = async () => {
@@ -95,10 +102,12 @@ const AdminPanel = ({ translations, otp, apiKey, cloudinary, resourceUrls, onClo
       setError(translations['admin.missingUrl'] ?? 'Resource URL missing.');
       return;
     }
+
     if (!apiKey) {
       setError(translations['admin.missingKey'] ?? 'API key missing.');
       return;
     }
+
     try {
       const parsed = JSON.parse(payload);
       setStatus('saving');
