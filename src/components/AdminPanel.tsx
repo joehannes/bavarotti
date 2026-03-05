@@ -341,9 +341,9 @@ const AdminPanel = ({ translations, otp, apiKey, cloudinary, resourceUrls, onClo
     <div className="admin-panel" role="dialog" aria-modal="true">
       <div className="admin-panel__card">
         <div className="admin-panel__header">
-          <h3>{translations['admin.title']}</h3>
+          <h3>{translations['admin.title'] ?? 'Admin panel'}</h3>
           <button className="link-button" type="button" onClick={onClose}>
-            {translations['admin.close']}
+            {translations['admin.close'] ?? 'Close'}
           </button>
         </div>
 
