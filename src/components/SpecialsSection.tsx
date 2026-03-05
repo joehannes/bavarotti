@@ -6,20 +6,25 @@ type SpecialsSectionProps = {
   specials: Special[];
 };
 
-const SpecialsSection = ({ translations, specials }: SpecialsSectionProps) => (
+const SpecialsSection = ({ translations, specials }: SpecialsSectionProps) => {
+  const safeSpecials = Array.isArray(specials) ? specials : [];
+
+  return (
   <section className="section section--alt" id="specials">
     <SectionHeading
       title={translations['specials.title']}
       subtitle={translations['specials.subtitle']}
     />
     <div className="specials">
-      {specials.map((special) => (
+      {safeSpecials.map((special) => (
         <article key={special.id} className="special-card">
-          <img
-            src={special.image.url}
-            alt={translations[special.image.altKey] ?? special.image.altKey}
-            loading="lazy"
-          />
+          {special.image ? (
+            <img
+              src={special.image.url}
+              alt={translations[special.image.altKey] ?? special.image.altKey}
+              loading="lazy"
+            />
+          ) : null}
           <div className="special-card__content">
             <h3>{translations[special.nameKey] ?? special.nameKey}</h3>
             <p>{translations[special.descriptionKey] ?? special.descriptionKey}</p>
@@ -33,6 +38,7 @@ const SpecialsSection = ({ translations, specials }: SpecialsSectionProps) => (
       ))}
     </div>
   </section>
-);
+  );
+};
 
 export default SpecialsSection;
