@@ -37,7 +37,12 @@ const Footer = ({
             </a>
           </p>
           <p>
-            <strong>Location:</strong> Calle Pirata, Plaza El Pirata (donde Hotel Soles y discotheka La Luna), Los Corales, Bavaro, 23000, Punta Cana, RD
+            <strong>Location:</strong>
+            Calle Pirata, Plaza El Pirata</br>
+            Donde Hotel Soles y discotheka La Luna</br>
+            Los Corales, Bavaro</br>
+            23000, Punta Cana</br>
+            República Dominicana</br>
           </p>
         </div>
 
@@ -50,12 +55,7 @@ const Footer = ({
       </div>
 
       <div className="footer__map-wrap" aria-label="Bavarotti location map">
-        <iframe
-          title="Bavarotti Location"
-          src="https://maps.google.com/maps?q=18.685306,-68.411611&z=17&output=embed"
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        />
+        <iframe className="w-full m-0 p-0" title="Bavarotti Location" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15118.15409415875!2d-68.41739715!3d18.684693250000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ea8edc7af46a015%3A0x51219d6d39aa594c!2sPlaza%20El%20Pirata!5e0!3m2!1sen!2sdo!4v1772724870456!5m2!1sen!2sdo" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
 
       <p className="footer__legal">{translations['footer.legal']}</p>
