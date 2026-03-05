@@ -88,5 +88,7 @@
   "specials.chefCatch.alt": "Market fish",
   "specials.summerMariscos.name": "Summer mariscos",
   "specials.summerMariscos.desc": "Cold seafood platter with lime and herbs.",
-  "specials.summerMariscos.alt": "Seafood platter"
+  "specials.summerMariscos.alt": "Seafood platter",
+  "cta.order.confirm": "Order details",
+  "cta.order.desc": "We will confirm your order via WA"
 }
