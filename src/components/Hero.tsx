@@ -13,7 +13,7 @@ const Hero = ({ translations, onOrderClick }: HeroProps) => (
       <h1>{translations['hero.title']}</h1>
       <p>{translations['hero.subtitle']}</p>
       <div className="hero__actions">
-        <button className="btn btn--wa" onClick={onOrderClick}>
+        <button className="btn btn--primary" onClick={onOrderClick}>
           {translations['cta.order'] ?? 'Order via WhatsApp'}
         </button>
         <span className="hero__note">{translations['hero.note']}</span>
