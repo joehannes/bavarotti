@@ -27,9 +27,13 @@ export const useJsonFetch = <T,>(url?: string): FetchState<T> => {
         if (!response.ok) {
           throw new Error(`Request failed: ${response.status}`);
         }
-        const json = (await response.json()) as T;
+        const json = (await response.json()) as T | { record?: T };
+        const normalized =
+          typeof json === 'object' && json !== null && 'record' in json
+            ? (json as { record?: T }).record ?? null
+            : (json as T);
         if (isMounted) {
-          setData(json);
+          setData(normalized);
           setError(null);
         }
       } catch (fetchError) {
