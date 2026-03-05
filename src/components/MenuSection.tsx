@@ -57,7 +57,7 @@ const MenuSection = ({ translations, categories, items, onAdd, orderItems }: Men
                       ) : null}
                       <div className="menu-card__footer">
                         <button
-                          className="btn btn--ghost"
+                          className="btn btn--wa menu-card__add-btn"
                           onClick={() => onAdd(item)}
                           disabled={!item.available}
                         >

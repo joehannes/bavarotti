@@ -33,20 +33,26 @@ const emptyItem = (): MenuItem => ({
 const AdminPanel = ({ translations, otp, apiKey, cloudinary, resourceUrls, onClose }: AdminPanelProps) => {
   const [inputOtp, setInputOtp] = useState('');
   const [isUnlocked, setIsUnlocked] = useState(false);
-  const [selectedResource, setSelectedResource] = useState('menu');
-  const [payload, setPayload] = useState('');
   const [status, setStatus] = useState<UpdateState>('idle');
   const [error, setError] = useState('');
   const [menuDraft, setMenuDraft] = useState<MenuItem[]>([]);
   const [selectedMenuId, setSelectedMenuId] = useState('');
 
-  const resources = useMemo(
-    () =>
-      Object.entries(resourceUrls)
-        .filter(([, url]) => Boolean(url))
-        .map(([key]) => key),
-    [resourceUrls],
-  );
+  const categoriesOptions = useMemo(() => categories.map((category) => category.id), [categories]);
+
+  useEffect(() => {
+    if (!isUnlocked) {
+      return;
+    }
+
+    const loadAdminData = async () => {
+      try {
+        const [menuResponse, enResponse, esResponse, categoriesResponse] = await Promise.all([
+          fetch(resourceUrls.menu ?? '', { cache: 'no-store' }),
+          fetch(resourceUrls.translationsEn ?? '', { cache: 'no-store' }),
+          fetch(resourceUrls.translationsEs ?? '', { cache: 'no-store' }),
+          fetch(resourceUrls.categories ?? '', { cache: 'no-store' }),
+        ]);
 
   useEffect(() => {
     if (!isUnlocked) {
@@ -109,12 +115,69 @@ const AdminPanel = ({ translations, otp, apiKey, cloudinary, resourceUrls, onClo
     }
 
     try {
-      const parsed = JSON.parse(payload);
       setStatus('saving');
-      await updateJsonBin(url, apiKey, parsed);
+
+      const cleaned = menuDraft.map((item) => {
+        const generatedId = item.id || slugify(item.nameEn || item.nameEs);
+        const keyBase = `menu.${generatedId}`;
+        return {
+          ...item,
+          id: generatedId,
+          nameKey: item.nameKey || `${keyBase}.name`,
+          descriptionKey: item.descriptionKey || `${keyBase}.desc`,
+          altKey: item.altKey || `${keyBase}.alt`,
+        };
+      });
+
+      const menuPayload: MenuItem[] = cleaned.map((item) => ({
+        id: item.id,
+        categoryId: item.categoryId,
+        nameKey: item.nameKey,
+        descriptionKey: item.descriptionKey,
+        price: Number(item.price) || 0,
+        currency: item.currency || 'USD',
+        available: item.available,
+        image: item.imageUrl
+          ? {
+              url: item.imageUrl,
+              altKey: item.altKey,
+            }
+          : undefined,
+      }));
+
+      const [translationsEnResponse, translationsEsResponse] = await Promise.all([
+        fetch(resourceUrls.translationsEn, { cache: 'no-store' }),
+        fetch(resourceUrls.translationsEs, { cache: 'no-store' }),
+      ]);
+
+      const enJson = (await translationsEnResponse.json()) as Translations | { record?: Translations };
+      const esJson = (await translationsEsResponse.json()) as Translations | { record?: Translations };
+
+      const translationsEn = { ...normalizeTranslations(enJson) };
+      const translationsEs = { ...normalizeTranslations(esJson) };
+
+      cleaned.forEach((item) => {
+        translationsEn[item.nameKey] = item.nameEn || item.id;
+        translationsEs[item.nameKey] = item.nameEs || item.nameEn || item.id;
+        translationsEn[item.descriptionKey] = item.descEn || '';
+        translationsEs[item.descriptionKey] = item.descEs || '';
+
+        if (item.imageUrl) {
+          translationsEn[item.altKey] = item.imageAltEn || item.nameEn || item.id;
+          translationsEs[item.altKey] = item.imageAltEs || item.nameEs || item.nameEn || item.id;
+        }
+      });
+
+      await Promise.all([
+        updateJsonBin(resourceUrls.menu, apiKey, menuPayload),
+        updateJsonBin(resourceUrls.translationsEn, apiKey, translationsEn),
+        updateJsonBin(resourceUrls.translationsEs, apiKey, translationsEs),
+      ]);
+
+      setMenuDraft(cleaned);
       setStatus('saved');
       setError('');
-    } catch (submitError) {
+    } catch (saveError) {
       setStatus('error');
       setError(submitError instanceof Error ? submitError.message : translations['admin.unknownError']);
     }
@@ -223,7 +286,7 @@ const AdminPanel = ({ translations, otp, apiKey, cloudinary, resourceUrls, onClo
                 value={inputOtp}
                 onChange={(event) => setInputOtp(event.target.value)}
               />
-              <button className="btn btn--primary" type="button" onClick={handleUnlock}>
+              <button className="btn btn--wa" type="button" onClick={handleUnlock}>
                 {translations['admin.unlock']}
               </button>
             </div>
