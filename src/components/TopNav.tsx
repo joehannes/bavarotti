@@ -20,11 +20,11 @@ const TopNav = ({
   <header className="top-nav">
     <div className="top-nav__inner">
       <a className="top-nav__brand" href="#top" aria-label={brandName}>
-        <img src="/favicon-96x96.png" alt={brandName} loading="eager" />
+        <img src="/babawati_icon.jpeg" alt={brandName} loading="eager" />
         <span>{brandName.toUpperCase()}</span>
       </a>
       <div className="top-nav__actions">
-        <button type="button" className="btn btn--ghost top-nav__order" onClick={onOrderClick}>
+        <button type="button" className="btn btn--wa top-nav__order" onClick={onOrderClick}>
           {translations['cta.order'] ?? 'Order'}
         </button>
         <LanguageToggle current={language} onChange={onLanguageChange} />
