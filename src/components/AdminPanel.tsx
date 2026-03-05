@@ -15,7 +15,7 @@ type AdminPanelProps = {
   };
   resourceUrls: Record<string, string | undefined>;
   onClose: () => void;
-};
+}
 
 type UpdateState = 'idle' | 'saving' | 'saved' | 'error';
 
@@ -78,7 +78,7 @@ const AdminPanel = ({ translations, otp, apiKey, cloudinary, resourceUrls, onClo
       } catch {
         setError(translations['admin.unknownError'] ?? 'Failed loading admin data.');
       }
-    };
+    }
 
     void loadMenu();
   }, [isUnlocked, resourceUrls.menu, translations]);
@@ -100,7 +100,7 @@ const AdminPanel = ({ translations, otp, apiKey, cloudinary, resourceUrls, onClo
     }
 
     setError(translations['admin.otpError'] ?? 'Invalid OTP');
-  };
+  }
 
   const handleRawSubmit = async () => {
     const url = resourceUrls[selectedResource];
@@ -126,7 +126,7 @@ const AdminPanel = ({ translations, otp, apiKey, cloudinary, resourceUrls, onClo
           nameKey: item.nameKey || `${keyBase}.name`,
           descriptionKey: item.descriptionKey || `${keyBase}.desc`,
           altKey: item.altKey || `${keyBase}.alt`,
-        };
+        }
       });
 
       const menuPayload: MenuItem[] = cleaned.map((item) => ({
@@ -181,7 +181,7 @@ const AdminPanel = ({ translations, otp, apiKey, cloudinary, resourceUrls, onClo
       setStatus('error');
       setError(submitError instanceof Error ? submitError.message : translations['admin.unknownError']);
     }
-  };
+  }
 
   const updateSelectedItem = (changes: Partial<MenuItem>) => {
     setMenuDraft((prev) => prev.map((item) => (item.id === selectedMenuId ? { ...item, ...changes } : item)));
@@ -192,7 +192,7 @@ const AdminPanel = ({ translations, otp, apiKey, cloudinary, resourceUrls, onClo
     next.id = `item-${Date.now()}`;
     setMenuDraft((prev) => [...prev, next]);
     setSelectedMenuId(next.id);
-  };
+  }
 
   const handleDeleteMenuItem = () => {
     if (!selectedMenuItem) {
@@ -201,7 +201,7 @@ const AdminPanel = ({ translations, otp, apiKey, cloudinary, resourceUrls, onClo
 
     setMenuDraft((prev) => prev.filter((item) => item.id !== selectedMenuItem.id));
     setSelectedMenuId('');
-  };
+  }
 
   const handleSaveMenu = async () => {
     const url = resourceUrls.menu;
@@ -219,7 +219,7 @@ const AdminPanel = ({ translations, otp, apiKey, cloudinary, resourceUrls, onClo
       setStatus('error');
       setError(saveError instanceof Error ? saveError.message : 'Failed saving menu.');
     }
-  };
+  }
 
   const handleUploadImage = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -247,7 +247,7 @@ const AdminPanel = ({ translations, otp, apiKey, cloudinary, resourceUrls, onClo
       setStatus('error');
       setError(uploadError instanceof Error ? uploadError.message : 'Image upload failed.');
     }
-  };
+  }
 
   const handleDeleteImage = async () => {
     if (!selectedMenuItem?.image?.url) {
@@ -264,7 +264,7 @@ const AdminPanel = ({ translations, otp, apiKey, cloudinary, resourceUrls, onClo
       setStatus('error');
       setError(deleteError instanceof Error ? deleteError.message : 'Image delete failed.');
     }
-  };
+  }
 
   return (
     <div className="admin-panel" role="dialog" aria-modal="true">
