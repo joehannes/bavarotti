@@ -24,7 +24,7 @@ const TopNav = ({
         <span>{brandName.toUpperCase()}</span>
       </a>
       <div className="top-nav__actions">
-        <button type="button" className="btn btn--wa top-nav__order" onClick={onOrderClick}>
+        <button type="button" className="btn btn--ghost top-nav__order" onClick={onOrderClick}>
           {translations['cta.order'] ?? 'Order'}
         </button>
         <LanguageToggle current={language} onChange={onLanguageChange} />
