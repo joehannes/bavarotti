@@ -16,34 +16,19 @@ const env = import.meta.env;
 const restaurantName = env.VITE_RESTAURANT_NAME ?? 'Bavarotti';
 const whatsappNumber = env.VITE_WHATSAPP_NUMBER ?? '';
 const adminOtp =
-  env.WHITE_ADMIN_OTP ??
-  env.white_admin_otp ??
   env.VITE_ADMIN_OTP ??
   '';
 
 const jsonBinApiKey =
-  env.WHITE_JSONBIN_KEY ??
-  env.white_jsonbin_key ??
   env.VITE_JSONBIN_API_KEY ??
   '';
 
+
 const cloudinary = {
-  cloudName:
-    env.WHITE_CLOUDINARY_CLOUD_NAME ??
-    env.white_cloudinary_cloud_name ??
-    env.VITE_CLOUDINARY_CLOUD_NAME ??
-    '',
-  apiKey:
-    env.WHITE_CLOUDINARY_API_TOKEN ??
-    env.white_cloudinary_api_token ??
-    env.VITE_CLOUDINARY_API_KEY ??
-    '',
-  apiSecret:
-    env.WHITE_CLOUDINARY_API_SECRET ??
-    env.white_cloudinary_api_secret ??
-    env.VITE_CLOUDINARY_API_SECRET ??
-    '',
-  folder: env.VITE_CLOUDINARY_FOLDER ?? 'bavarotti',
+  cloudName: import.meta.env.VITE_CLOUDINARY_CLOUD_NAME ?? '',
+  apiKey: import.meta.env.VITE_CLOUDINARY_API_KEY ?? import.meta.env.VITE_CLOUDINARY_API_TOKEN ?? '',
+  apiSecret: import.meta.env.VITE_CLOUDINARY_API_SECRET ?? '',
+  folder: import.meta.env.VITE_CLOUDINARY_FOLDER ?? 'bavarotti',
 };
 
 const jsonUrls = {
@@ -70,40 +55,9 @@ const App = () => {
     translationsState.data && typeof translationsState.data === 'object' && !Array.isArray(translationsState.data)
       ? translationsState.data
       : {};
-
   const menuItems = Array.isArray(menuState.data) ? menuState.data : [];
   const categories = Array.isArray(categoriesState.data) ? categoriesState.data : [];
   const specials = Array.isArray(specialsState.data) ? specialsState.data : [];
-
-  const adminResourceUrls = useMemo(
-    () => ({
-      menu: jsonUrls.menu,
-      categories: jsonUrls.categories,
-      specials: jsonUrls.specials,
-      translationsEn: jsonUrls.translationsEn,
-      translationsEs: jsonUrls.translationsEs,
-    }),
-    [],
-  );
-
-
-  useEffect(() => {
-    document.body.style.overflow = showAdmin ? 'hidden' : '';
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [showAdmin]);
-
-  useEffect(() => {
-    const onScroll = () => {
-      const offset = Math.min(window.scrollY * 0.2, 80);
-      document.documentElement.style.setProperty('--parallax-offset', `${offset}px`);
-    };
-
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   const handleLanguageChange = (nextLanguage: Language) => {
     setLanguage(nextLanguage);
@@ -172,8 +126,8 @@ const App = () => {
             languageLabel={translations[`language.${language}`] ?? language}
           />
           <div className="cart__helper">
-            <h3>{translations['cta.order.confirm'] ?? translations['cart.helpTitle'] ?? 'Order details'}</h3>
-            <p>{translations['cta.order.desc'] ?? translations['cart.helpText'] ?? 'We will confirm your order via WA.'}</p>
+            <h3>{translations['cart.helpTitle'] ?? 'Order details'}</h3>
+            <p>{translations['cart.helpText'] ?? 'We will confirm your order on WhatsApp before preparing it.'}</p>
           </div>
         </div>
       </section>
@@ -190,7 +144,13 @@ const App = () => {
           otp={adminOtp}
           apiKey={jsonBinApiKey}
           cloudinary={cloudinary}
-          resourceUrls={adminResourceUrls}
+          resourceUrls={{
+            menu: jsonUrls.menu,
+            categories: jsonUrls.categories,
+            specials: jsonUrls.specials,
+            translationsEn: jsonUrls.translationsEn,
+            translationsEs: jsonUrls.translationsEs,
+          }}
           onClose={() => setShowAdmin(false)}
         />
       ) : null}

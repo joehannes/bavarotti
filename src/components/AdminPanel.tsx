@@ -89,7 +89,6 @@ const AdminPanel = ({ translations, otp, apiKey, cloudinary, resourceUrls, onClo
 
   useEffect(() => {
     if (!isUnlocked) {
-      setStatus('idle');
       return;
     }
 
@@ -100,7 +99,6 @@ const AdminPanel = ({ translations, otp, apiKey, cloudinary, resourceUrls, onClo
       }
 
       try {
-        setStatus('saving');
         const [menuResponse, enResponse, esResponse, categoriesResponse] = await Promise.all([
           fetch(menuUrl, { cache: 'no-store' }),
           fetch(translationsEnUrl, { cache: 'no-store' }),
@@ -152,10 +150,8 @@ const AdminPanel = ({ translations, otp, apiKey, cloudinary, resourceUrls, onClo
 
         setMenuDraft(editable);
         setCategories(normalizedCategories);
-        setStatus('idle');
         setError('');
       } catch {
-        setStatus('error');
         setError(translations['admin.unknownError'] ?? 'Failed loading admin data.');
       }
     };
@@ -169,7 +165,7 @@ const AdminPanel = ({ translations, otp, apiKey, cloudinary, resourceUrls, onClo
       return;
     }
 
-    if (inputOtp.trim() === otp.trim()) {
+    if (inputOtp.trim() === otp) {
       setIsUnlocked(true);
       setError('');
       return;
