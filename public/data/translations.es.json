@@ -88,5 +88,7 @@
   "specials.chefCatch.alt": "Pescado del mercado",
   "specials.summerMariscos.name": "Mariscos de verano",
   "specials.summerMariscos.desc": "Tabla fría de mariscos con lima y hierbas.",
-  "specials.summerMariscos.alt": "Tabla de mariscos"
+  "specials.summerMariscos.alt": "Tabla de mariscos",
+  "cta.order.confirm": "Detalles del pedido",
+  "cta.order.desc": "Confirmaremos tu pedido por WA"
 }
