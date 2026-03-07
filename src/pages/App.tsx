@@ -88,11 +88,20 @@ const App = () => {
     menuState.error || categoriesState.error || specialsState.error || translationsState.error;
 
   if (loading && !translationsState.data) {
-    return <div className="loading" aria-busy="true" />;
+    return (
+      <div className="loading" aria-busy="true">
+        <p>Loading menu…</p>
+      </div>
+    );
   }
 
   if (hasError && !translationsState.data) {
-    return <div className="error" role="alert" />;
+    return (
+      <div className="error" role="alert">
+        <h1>Unable to load the menu data.</h1>
+        <p>Please verify JSON data URLs or use local `/public/data/*.json` files.</p>
+      </div>
+    );
   }
 
   return (
