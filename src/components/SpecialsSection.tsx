@@ -8,6 +8,16 @@ type SpecialsSectionProps = {
 
 const SpecialsSection = ({ translations, specials }: SpecialsSectionProps) => {
   const safeSpecials = Array.isArray(specials) ? specials : [];
+  const today = new Date().toLocaleDateString('en-US', { weekday: 'short' }).toLowerCase();
+  const activeSpecials = safeSpecials.filter((special) => {
+    if (!special.available) {
+      return false;
+    }
+    if (!special.dayTags?.length) {
+      return true;
+    }
+    return special.dayTags.map((tag) => tag.toLowerCase()).includes(today);
+  });
 
   return (
   <section className="section section--alt" id="specials">
@@ -16,7 +26,7 @@ const SpecialsSection = ({ translations, specials }: SpecialsSectionProps) => {
       subtitle={translations['specials.subtitle']}
     />
     <div className="specials">
-      {safeSpecials.map((special) => (
+      {activeSpecials.map((special) => (
         <article key={special.id} className="special-card">
           {special.image ? (
             <img
@@ -28,6 +38,9 @@ const SpecialsSection = ({ translations, specials }: SpecialsSectionProps) => {
           <div className="special-card__content">
             <h3>{translations[special.nameKey] ?? special.nameKey}</h3>
             <p>{translations[special.descriptionKey] ?? special.descriptionKey}</p>
+            {special.promoKey ? (
+              <p className="special-card__promo">{translations[special.promoKey] ?? special.promoKey}</p>
+            ) : null}
             <span className={`pill ${special.available ? '' : 'pill--muted'}`}>
               {special.available
                 ? translations['specials.available']
