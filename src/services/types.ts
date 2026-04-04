@@ -23,11 +23,14 @@ export type Special = {
   id: string;
   nameKey: string;
   descriptionKey: string;
+  promoKey?: string;
   image?: {
     url: string;
     altKey: string;
   };
   available: boolean;
+  dayTags?: string[];
+  occasionTag?: string;
 };
 
 export type Translations = Record<string, string>;
