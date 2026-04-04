@@ -30,10 +30,20 @@ const Footer = ({
         <div className="footer__social-menu">
           <p><strong>Instagram:</strong> @bavarottibeacheats</p>
           <p><strong>Facebook:</strong> @bavarottibeacheats</p>
+          <p><strong>TikTok:</strong> @bavarottibeachvibes</p>
           <p>
             <strong>WhatsApp:</strong>{' '}
             <a href={whatsappHref} target="_blank" rel="noreferrer">
               {whatsappNumber || translations['footer.whatsapp'] || 'WhatsApp'}
+            </a>
+          </p>
+          <p>
+            <strong>{translations['footer.weeklyTitle'] ?? 'Weekly party drops:'}</strong><br />
+            {translations['footer.weekly'] ?? 'Tue Taco + DJ set • Thu Seafood sunset • Sat EDM beach combo'}
+          </p>
+          <p>
+            <a className="btn btn--ghost" href={whatsappHref} target="_blank" rel="noreferrer">
+              {translations['cta.questions'] ?? 'General questions on WhatsApp'}
             </a>
           </p>
           <p>

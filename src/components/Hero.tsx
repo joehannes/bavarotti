@@ -16,6 +16,7 @@ const Hero = ({ translations, onOrderClick }: HeroProps) => (
         <button className="btn btn--primary" onClick={onOrderClick}>
           {translations['cta.order'] ?? 'Order via WhatsApp'}
         </button>
+        <span className="pill">{translations['hero.delivery'] ?? 'Fast delivery in Los Corales, Cortecito & nearby hotels'}</span>
         <span className="hero__note">{translations['hero.note']}</span>
       </div>
     </div>

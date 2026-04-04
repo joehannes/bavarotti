@@ -1,22 +1,28 @@
 [
   {
-    "id": "chef-catch",
-    "nameKey": "specials.chefCatch.name",
-    "descriptionKey": "specials.chefCatch.desc",
+    "id": "dj-wave",
+    "nameKey": "specials.djWave.name",
+    "descriptionKey": "specials.djWave.desc",
+    "promoKey": "specials.djWave.promo",
     "image": {
-      "url": "https://res.cloudinary.com/demo/image/upload/c_fill,w_680,h_460,q_auto,f_auto/fish.jpg",
-      "altKey": "specials.chefCatch.alt"
+      "url": "https://res.cloudinary.com/demo/image/upload/c_fill,w_680,h_460,q_auto,f_auto/cocktail.jpg",
+      "altKey": "specials.djWave.alt"
     },
-    "available": true
+    "available": true,
+    "dayTags": ["fri", "sat", "sun"],
+    "occasionTag": "edm-beach"
   },
   {
-    "id": "summer-mariscos",
-    "nameKey": "specials.summerMariscos.name",
-    "descriptionKey": "specials.summerMariscos.desc",
+    "id": "taco-fiesta",
+    "nameKey": "specials.tacoFiesta.name",
+    "descriptionKey": "specials.tacoFiesta.desc",
+    "promoKey": "specials.tacoFiesta.promo",
     "image": {
-      "url": "https://res.cloudinary.com/demo/image/upload/c_fill,w_680,h_460,q_auto,f_auto/shrimp.jpg",
-      "altKey": "specials.summerMariscos.alt"
+      "url": "https://res.cloudinary.com/demo/image/upload/c_fill,w_680,h_460,q_auto,f_auto/taco.jpg",
+      "altKey": "specials.tacoFiesta.alt"
     },
-    "available": false
+    "available": true,
+    "dayTags": ["thu"],
+    "occasionTag": "fiesta-night"
   }
 ]
