@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState, type ChangeEvent } from 'react';
-import { updateJsonBin } from '../services/jsonBin';
+import { jsonBinReadHeaders, updateJsonBin } from '../services/jsonBin';
 import { deleteImageFromCloudinary, uploadImageToCloudinary } from '../services/cloudinary';
-import type { Category, MenuItem, Translations } from '../services/types';
+import type { Category, MenuItem, Special, Translations } from '../services/types';
 
 type AdminPanelProps = {
   translations: Translations;
@@ -34,6 +34,26 @@ type EditableMenuItem = {
   descEs: string;
   nameKey: string;
   descriptionKey: string;
+  altKey: string;
+};
+
+type EditableSpecial = {
+  id: string;
+  available: boolean;
+  imageUrl: string;
+  imageAltEn: string;
+  imageAltEs: string;
+  nameEn: string;
+  nameEs: string;
+  descEn: string;
+  descEs: string;
+  promoEn: string;
+  promoEs: string;
+  dayTags: string;
+  occasionTag: string;
+  nameKey: string;
+  descriptionKey: string;
+  promoKey: string;
   altKey: string;
 };
 
@@ -81,10 +101,18 @@ const AdminPanel = ({ translations, otp, apiKey, cloudinary, resourceUrls, onClo
   const [status, setStatus] = useState<UpdateState>('idle');
   const [error, setError] = useState('');
   const [menuDraft, setMenuDraft] = useState<EditableMenuItem[]>([]);
+  const [specialsDraft, setSpecialsDraft] = useState<EditableSpecial[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
 
   const categoriesOptions = useMemo(() => categories.map((category) => category.id), [categories]);
-  const { menu: menuUrl, translationsEn: translationsEnUrl, translationsEs: translationsEsUrl, categories: categoriesUrl } = resourceUrls;
+  const {
+    menu: menuUrl,
+    translationsEn: translationsEnUrl,
+    translationsEs: translationsEsUrl,
+    categories: categoriesUrl,
+    specials: specialsUrl,
+  } = resourceUrls;
+  const readHeaders = useMemo(() => jsonBinReadHeaders(apiKey), [apiKey]);
 
 
   useEffect(() => {
@@ -93,20 +121,21 @@ const AdminPanel = ({ translations, otp, apiKey, cloudinary, resourceUrls, onClo
     }
 
     const loadAdminData = async () => {
-      if (!menuUrl || !translationsEnUrl || !translationsEsUrl || !categoriesUrl) {
+      if (!menuUrl || !translationsEnUrl || !translationsEsUrl || !categoriesUrl || !specialsUrl) {
         setError(translations['admin.missingUrl'] ?? 'Resource URL missing.');
         return;
       }
 
       try {
-        const [menuResponse, enResponse, esResponse, categoriesResponse] = await Promise.all([
-          fetch(menuUrl, { cache: 'no-store' }),
-          fetch(translationsEnUrl, { cache: 'no-store' }),
-          fetch(translationsEsUrl, { cache: 'no-store' }),
-          fetch(categoriesUrl, { cache: 'no-store' }),
+        const [menuResponse, enResponse, esResponse, categoriesResponse, specialsResponse] = await Promise.all([
+          fetch(menuUrl, { cache: 'no-store', headers: readHeaders }),
+          fetch(translationsEnUrl, { cache: 'no-store', headers: readHeaders }),
+          fetch(translationsEsUrl, { cache: 'no-store', headers: readHeaders }),
+          fetch(categoriesUrl, { cache: 'no-store', headers: readHeaders }),
+          fetch(specialsUrl, { cache: 'no-store', headers: readHeaders }),
         ]);
 
-        if (!menuResponse.ok || !enResponse.ok || !esResponse.ok || !categoriesResponse.ok) {
+        if (!menuResponse.ok || !enResponse.ok || !esResponse.ok || !categoriesResponse.ok || !specialsResponse.ok) {
           throw new Error('Failed to fetch admin resources');
         }
 
@@ -114,6 +143,7 @@ const AdminPanel = ({ translations, otp, apiKey, cloudinary, resourceUrls, onClo
         const enJson = (await enResponse.json()) as Translations | { record?: Translations };
         const esJson = (await esResponse.json()) as Translations | { record?: Translations };
         const categoriesJson = (await categoriesResponse.json()) as Category[] | { record?: Category[] };
+        const specialsJson = (await specialsResponse.json()) as Special[] | { record?: Special[] };
 
         const menuEnvelope = normalizeEnvelope(menuJson);
         const menu = Array.isArray(menuEnvelope) ? menuEnvelope : [];
@@ -123,6 +153,8 @@ const AdminPanel = ({ translations, otp, apiKey, cloudinary, resourceUrls, onClo
 
         const categoriesEnvelope = normalizeEnvelope(categoriesJson);
         const normalizedCategories = Array.isArray(categoriesEnvelope) ? categoriesEnvelope : [];
+        const specialsEnvelope = normalizeEnvelope(specialsJson);
+        const normalizedSpecials = Array.isArray(specialsEnvelope) ? specialsEnvelope : [];
 
         const editable = menu.map<EditableMenuItem>((item) => {
           const nameKey = item.nameKey || `menu.${item.id}.name`;
@@ -149,6 +181,33 @@ const AdminPanel = ({ translations, otp, apiKey, cloudinary, resourceUrls, onClo
         });
 
         setMenuDraft(editable);
+        setSpecialsDraft(
+          normalizedSpecials.map((item) => {
+            const nameKey = item.nameKey || `specials.${item.id}.name`;
+            const descriptionKey = item.descriptionKey || `specials.${item.id}.desc`;
+            const promoKey = item.promoKey || `specials.${item.id}.promo`;
+            const altKey = item.image?.altKey || `specials.${item.id}.alt`;
+            return {
+              id: item.id,
+              available: item.available,
+              imageUrl: item.image?.url ?? '',
+              imageAltEn: translationsEn[altKey] ?? '',
+              imageAltEs: translationsEs[altKey] ?? '',
+              nameEn: translationsEn[nameKey] ?? '',
+              nameEs: translationsEs[nameKey] ?? '',
+              descEn: translationsEn[descriptionKey] ?? '',
+              descEs: translationsEs[descriptionKey] ?? '',
+              promoEn: translationsEn[promoKey] ?? '',
+              promoEs: translationsEs[promoKey] ?? '',
+              dayTags: (item.dayTags ?? []).join(','),
+              occasionTag: item.occasionTag ?? '',
+              nameKey,
+              descriptionKey,
+              promoKey,
+              altKey,
+            };
+          }),
+        );
         setCategories(normalizedCategories);
         setError('');
       } catch {
@@ -157,7 +216,7 @@ const AdminPanel = ({ translations, otp, apiKey, cloudinary, resourceUrls, onClo
     };
 
     void loadAdminData();
-  }, [isUnlocked, menuUrl, translationsEnUrl, translationsEsUrl, categoriesUrl, translations]);
+  }, [isUnlocked, menuUrl, translationsEnUrl, translationsEsUrl, categoriesUrl, specialsUrl, translations, readHeaders]);
 
   const handleUnlock = () => {
     if (!otp) {
@@ -199,6 +258,36 @@ const AdminPanel = ({ translations, otp, apiKey, cloudinary, resourceUrls, onClo
         nameKey: `menu.${id}.name`,
         descriptionKey: `menu.${id}.desc`,
         altKey: `menu.${id}.alt`,
+      },
+      ...prev,
+    ]);
+  };
+
+  const updateSpecial = (specialId: string, changes: Partial<EditableSpecial>) => {
+    setSpecialsDraft((prev) => prev.map((item) => (item.id === specialId ? { ...item, ...changes } : item)));
+  };
+
+  const handleAddSpecial = () => {
+    const id = `special-${Date.now()}`;
+    setSpecialsDraft((prev) => [
+      {
+        id,
+        available: true,
+        imageUrl: '',
+        imageAltEn: '',
+        imageAltEs: '',
+        nameEn: '',
+        nameEs: '',
+        descEn: '',
+        descEs: '',
+        promoEn: '',
+        promoEs: '',
+        dayTags: 'fri,sat',
+        occasionTag: '',
+        nameKey: `specials.${id}.name`,
+        descriptionKey: `specials.${id}.desc`,
+        promoKey: `specials.${id}.promo`,
+        altKey: `specials.${id}.alt`,
       },
       ...prev,
     ]);
@@ -263,7 +352,7 @@ const AdminPanel = ({ translations, otp, apiKey, cloudinary, resourceUrls, onClo
       return;
     }
 
-    if (!menuUrl || !translationsEnUrl || !translationsEsUrl) {
+    if (!menuUrl || !translationsEnUrl || !translationsEsUrl || !specialsUrl) {
       setError(translations['admin.missingUrl'] ?? 'Resource URL missing.');
       return;
     }
@@ -300,8 +389,8 @@ const AdminPanel = ({ translations, otp, apiKey, cloudinary, resourceUrls, onClo
       }));
 
       const [translationsEnResponse, translationsEsResponse] = await Promise.all([
-        fetch(translationsEnUrl, { cache: 'no-store' }),
-        fetch(translationsEsUrl, { cache: 'no-store' }),
+        fetch(translationsEnUrl, { cache: 'no-store', headers: readHeaders }),
+        fetch(translationsEsUrl, { cache: 'no-store', headers: readHeaders }),
       ]);
 
       const enJson = (await translationsEnResponse.json()) as Translations | { record?: Translations };
@@ -322,8 +411,38 @@ const AdminPanel = ({ translations, otp, apiKey, cloudinary, resourceUrls, onClo
         }
       });
 
+      const specialsPayload: Special[] = specialsDraft.map((item) => ({
+        id: item.id,
+        nameKey: item.nameKey,
+        descriptionKey: item.descriptionKey,
+        promoKey: item.promoKey,
+        available: item.available,
+        dayTags: item.dayTags.split(',').map((value) => value.trim()).filter(Boolean),
+        occasionTag: item.occasionTag || undefined,
+        image: item.imageUrl
+          ? {
+              url: item.imageUrl,
+              altKey: item.altKey,
+            }
+          : undefined,
+      }));
+
+      specialsDraft.forEach((item) => {
+        translationsEn[item.nameKey] = item.nameEn || item.id;
+        translationsEs[item.nameKey] = item.nameEs || item.nameEn || item.id;
+        translationsEn[item.descriptionKey] = item.descEn || '';
+        translationsEs[item.descriptionKey] = item.descEs || '';
+        translationsEn[item.promoKey] = item.promoEn || '';
+        translationsEs[item.promoKey] = item.promoEs || '';
+        if (item.imageUrl) {
+          translationsEn[item.altKey] = item.imageAltEn || item.nameEn || item.id;
+          translationsEs[item.altKey] = item.imageAltEs || item.nameEs || item.nameEn || item.id;
+        }
+      });
+
       await Promise.all([
         updateJsonBin(menuUrl, apiKey, menuPayload),
+        updateJsonBin(specialsUrl, apiKey, specialsPayload),
         updateJsonBin(translationsEnUrl, apiKey, translationsEn),
         updateJsonBin(translationsEsUrl, apiKey, translationsEs),
       ]);
@@ -463,6 +582,43 @@ const AdminPanel = ({ translations, otp, apiKey, cloudinary, resourceUrls, onClo
                     >
                       Delete image
                     </button>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            <div className="admin-editor__header">
+              <h4>Social / Party Specials</h4>
+              <button type="button" className="btn btn--ghost" onClick={handleAddSpecial}>
+                Add special
+              </button>
+            </div>
+            <div className="admin-editor__list">
+              {specialsDraft.map((item) => (
+                <article className="admin-item" key={item.id}>
+                  <div className="admin-item__top">
+                    <strong>{item.nameEn || item.nameEs || item.id}</strong>
+                    <label className="admin-editor__checkbox">
+                      <input
+                        type="checkbox"
+                        checked={item.available}
+                        onChange={(event) => updateSpecial(item.id, { available: event.target.checked })}
+                      />
+                      available
+                    </label>
+                  </div>
+                  <div className="admin-editor__grid">
+                    <input value={item.nameEs} placeholder="Special name ES" onChange={(event) => updateSpecial(item.id, { nameEs: event.target.value })} />
+                    <input value={item.nameEn} placeholder="Special name EN" onChange={(event) => updateSpecial(item.id, { nameEn: event.target.value })} />
+                    <input value={item.descEs} placeholder="Description ES" onChange={(event) => updateSpecial(item.id, { descEs: event.target.value })} />
+                    <input value={item.descEn} placeholder="Description EN" onChange={(event) => updateSpecial(item.id, { descEn: event.target.value })} />
+                    <input value={item.promoEs} placeholder="Promo text ES" onChange={(event) => updateSpecial(item.id, { promoEs: event.target.value })} />
+                    <input value={item.promoEn} placeholder="Promo text EN" onChange={(event) => updateSpecial(item.id, { promoEn: event.target.value })} />
+                    <input value={item.dayTags} placeholder="day tags (mon,tue,fri)" onChange={(event) => updateSpecial(item.id, { dayTags: event.target.value })} />
+                    <input value={item.occasionTag} placeholder="Occasion tag (e.g. dj-night)" onChange={(event) => updateSpecial(item.id, { occasionTag: event.target.value })} />
+                    <input value={item.imageUrl} placeholder="Image URL" onChange={(event) => updateSpecial(item.id, { imageUrl: event.target.value })} />
+                    <input value={item.imageAltEs} placeholder="Image ALT ES" onChange={(event) => updateSpecial(item.id, { imageAltEs: event.target.value })} />
+                    <input value={item.imageAltEn} placeholder="Image ALT EN" onChange={(event) => updateSpecial(item.id, { imageAltEn: event.target.value })} />
                   </div>
                 </article>
               ))}

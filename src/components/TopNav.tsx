@@ -20,7 +20,7 @@ const TopNav = ({
   <header className="top-nav">
     <div className="top-nav__inner">
       <a className="top-nav__brand" href="#top" aria-label={brandName}>
-        <img src="/babawati_icon.jpeg" alt={brandName} loading="eager" />
+        <img src="/favicon.ico" alt={brandName} loading="eager" />
         <span>{brandName.toUpperCase()}</span>
       </a>
       <div className="top-nav__actions">

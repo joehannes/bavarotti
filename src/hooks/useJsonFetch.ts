@@ -6,7 +6,7 @@ export type FetchState<T> = {
   error: string | null;
 };
 
-export const useJsonFetch = <T,>(url?: string): FetchState<T> => {
+export const useJsonFetch = <T,>(url?: string, headers?: Record<string, string>): FetchState<T> => {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState<boolean>(Boolean(url));
   const [error, setError] = useState<string | null>(null);
@@ -23,7 +23,7 @@ export const useJsonFetch = <T,>(url?: string): FetchState<T> => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await fetch(url, { cache: 'no-store' });
+        const response = await fetch(url, { cache: 'no-store', headers });
         if (!response.ok) {
           throw new Error(`Request failed: ${response.status}`);
         }
@@ -52,7 +52,7 @@ export const useJsonFetch = <T,>(url?: string): FetchState<T> => {
     return () => {
       isMounted = false;
     };
-  }, [url]);
+  }, [url, headers]);
 
   return { data, loading, error };
 };
