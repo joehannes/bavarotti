@@ -44,7 +44,7 @@ img { width: 100%; display: block; border-radius: 20px; object-fit: cover; }
   min-height: min(86vh, 720px);
   display: grid;
   align-items: center;
-  background-image: linear-gradient(rgba(8, 28, 31, 0.46), rgba(8, 28, 31, 0.54)), url('/hero_mobile.jpg');
+  background-image: linear-gradient(rgba(8, 28, 31, 0.46), rgba(8, 28, 31, 0.54)), url('https://res.cloudinary.com/demo/image/upload/c_fill,w_1200,h_800,q_auto,f_auto/beach.jpg');
   background-size: cover;
   background-position: center;
 }
