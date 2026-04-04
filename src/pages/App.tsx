@@ -33,11 +33,11 @@ const cloudinary = {
 };
 
 const jsonUrls = {
-  menu: resolveJsonBinUrl(env.VITE_JSONBIN_MENU_URL),
-  categories: resolveJsonBinUrl(env.VITE_JSONBIN_CATEGORIES_URL),
-  specials: resolveJsonBinUrl(env.VITE_JSONBIN_SPECIALS_URL),
-  translationsEn: resolveJsonBinUrl(env.VITE_JSONBIN_TRANSLATIONS_EN_URL),
-  translationsEs: resolveJsonBinUrl(env.VITE_JSONBIN_TRANSLATIONS_ES_URL),
+  menu: resolveJsonBinUrl(env.VITE_JSONBIN_MENU_URL) ?? '/data/menu.json',
+  categories: resolveJsonBinUrl(env.VITE_JSONBIN_CATEGORIES_URL) ?? '/data/categories.json',
+  specials: resolveJsonBinUrl(env.VITE_JSONBIN_SPECIALS_URL) ?? '/data/specials.json',
+  translationsEn: resolveJsonBinUrl(env.VITE_JSONBIN_TRANSLATIONS_EN_URL) ?? '/data/translations.en.json',
+  translationsEs: resolveJsonBinUrl(env.VITE_JSONBIN_TRANSLATIONS_ES_URL) ?? '/data/translations.es.json',
 };
 
 const App = () => {
