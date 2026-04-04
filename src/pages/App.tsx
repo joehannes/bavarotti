@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import Hero from '../components/Hero';
 import MenuSection from '../components/MenuSection';
 import SpecialsSection from '../components/SpecialsSection';
@@ -10,6 +10,7 @@ import TopNav from '../components/TopNav';
 import { useJsonFetch } from '../hooks/useJsonFetch';
 import type { Category, MenuItem, OrderItem, Special, Translations } from '../services/types';
 import { getStoredLanguage, setStoredLanguage, type Language } from '../services/i18n';
+import { jsonBinReadHeaders, resolveJsonBinUrl } from '../services/jsonBin';
 
 const env = import.meta.env;
 
@@ -32,24 +33,25 @@ const cloudinary = {
 };
 
 const jsonUrls = {
-  menu: env.VITE_JSONBIN_MENU_URL,
-  categories: env.VITE_JSONBIN_CATEGORIES_URL,
-  specials: env.VITE_JSONBIN_SPECIALS_URL,
-  translationsEn: env.VITE_JSONBIN_TRANSLATIONS_EN_URL,
-  translationsEs: env.VITE_JSONBIN_TRANSLATIONS_ES_URL,
+  menu: resolveJsonBinUrl(env.VITE_JSONBIN_MENU_URL),
+  categories: resolveJsonBinUrl(env.VITE_JSONBIN_CATEGORIES_URL),
+  specials: resolveJsonBinUrl(env.VITE_JSONBIN_SPECIALS_URL),
+  translationsEn: resolveJsonBinUrl(env.VITE_JSONBIN_TRANSLATIONS_EN_URL),
+  translationsEs: resolveJsonBinUrl(env.VITE_JSONBIN_TRANSLATIONS_ES_URL),
 };
 
 const App = () => {
   const [language, setLanguage] = useState<Language>(getStoredLanguage());
   const [orderItems, setOrderItems] = useState<OrderItem[]>([]);
   const [showAdmin, setShowAdmin] = useState(false);
+  const readHeaders = useMemo(() => jsonBinReadHeaders(jsonBinApiKey), []);
 
   const translationsUrl = language === 'en' ? jsonUrls.translationsEn : jsonUrls.translationsEs;
 
-  const menuState = useJsonFetch<MenuItem[]>(jsonUrls.menu);
-  const categoriesState = useJsonFetch<Category[]>(jsonUrls.categories);
-  const specialsState = useJsonFetch<Special[]>(jsonUrls.specials);
-  const translationsState = useJsonFetch<Translations>(translationsUrl);
+  const menuState = useJsonFetch<MenuItem[]>(jsonUrls.menu, readHeaders);
+  const categoriesState = useJsonFetch<Category[]>(jsonUrls.categories, readHeaders);
+  const specialsState = useJsonFetch<Special[]>(jsonUrls.specials, readHeaders);
+  const translationsState = useJsonFetch<Translations>(translationsUrl, readHeaders);
 
   const translations =
     translationsState.data && typeof translationsState.data === 'object' && !Array.isArray(translationsState.data)

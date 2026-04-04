@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState, type ChangeEvent } from 'react';
-import { updateJsonBin } from '../services/jsonBin';
+import { jsonBinReadHeaders, updateJsonBin } from '../services/jsonBin';
 import { deleteImageFromCloudinary, uploadImageToCloudinary } from '../services/cloudinary';
 import type { Category, MenuItem, Special, Translations } from '../services/types';
 
@@ -112,6 +112,7 @@ const AdminPanel = ({ translations, otp, apiKey, cloudinary, resourceUrls, onClo
     categories: categoriesUrl,
     specials: specialsUrl,
   } = resourceUrls;
+  const readHeaders = useMemo(() => jsonBinReadHeaders(apiKey), [apiKey]);
 
 
   useEffect(() => {
@@ -127,11 +128,11 @@ const AdminPanel = ({ translations, otp, apiKey, cloudinary, resourceUrls, onClo
 
       try {
         const [menuResponse, enResponse, esResponse, categoriesResponse, specialsResponse] = await Promise.all([
-          fetch(menuUrl, { cache: 'no-store' }),
-          fetch(translationsEnUrl, { cache: 'no-store' }),
-          fetch(translationsEsUrl, { cache: 'no-store' }),
-          fetch(categoriesUrl, { cache: 'no-store' }),
-          fetch(specialsUrl, { cache: 'no-store' }),
+          fetch(menuUrl, { cache: 'no-store', headers: readHeaders }),
+          fetch(translationsEnUrl, { cache: 'no-store', headers: readHeaders }),
+          fetch(translationsEsUrl, { cache: 'no-store', headers: readHeaders }),
+          fetch(categoriesUrl, { cache: 'no-store', headers: readHeaders }),
+          fetch(specialsUrl, { cache: 'no-store', headers: readHeaders }),
         ]);
 
         if (!menuResponse.ok || !enResponse.ok || !esResponse.ok || !categoriesResponse.ok || !specialsResponse.ok) {
@@ -215,7 +216,7 @@ const AdminPanel = ({ translations, otp, apiKey, cloudinary, resourceUrls, onClo
     };
 
     void loadAdminData();
-  }, [isUnlocked, menuUrl, translationsEnUrl, translationsEsUrl, categoriesUrl, specialsUrl, translations]);
+  }, [isUnlocked, menuUrl, translationsEnUrl, translationsEsUrl, categoriesUrl, specialsUrl, translations, readHeaders]);
 
   const handleUnlock = () => {
     if (!otp) {
@@ -388,8 +389,8 @@ const AdminPanel = ({ translations, otp, apiKey, cloudinary, resourceUrls, onClo
       }));
 
       const [translationsEnResponse, translationsEsResponse] = await Promise.all([
-        fetch(translationsEnUrl, { cache: 'no-store' }),
-        fetch(translationsEsUrl, { cache: 'no-store' }),
+        fetch(translationsEnUrl, { cache: 'no-store', headers: readHeaders }),
+        fetch(translationsEsUrl, { cache: 'no-store', headers: readHeaders }),
       ]);
 
       const enJson = (await translationsEnResponse.json()) as Translations | { record?: Translations };

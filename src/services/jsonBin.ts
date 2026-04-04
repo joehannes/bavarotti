@@ -10,6 +10,37 @@ const jsonBinHeaders = (apiKey?: string): Record<string, string> => {
   return headers;
 };
 
+const jsonBinIdPattern = /^[a-z0-9]{24}$/i;
+
+export const resolveJsonBinUrl = (value?: string): string | undefined => {
+  if (!value) {
+    return undefined;
+  }
+
+  const trimmed = value.trim();
+  if (!trimmed) {
+    return undefined;
+  }
+
+  if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
+    return trimmed;
+  }
+
+  if (jsonBinIdPattern.test(trimmed)) {
+    return `https://api.jsonbin.io/v3/b/${trimmed}/latest`;
+  }
+
+  return undefined;
+};
+
+export const jsonBinReadHeaders = (apiKey?: string): Record<string, string> => {
+  const headers: Record<string, string> = {};
+  if (apiKey) {
+    headers['X-Master-Key'] = apiKey;
+  }
+  return headers;
+};
+
 export const updateJsonBin = async <T,>(url: string, apiKey: string, payload: T): Promise<T> => {
   const response = await fetch(url, {
     method: 'PUT',
